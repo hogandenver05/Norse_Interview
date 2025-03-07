@@ -1,6 +1,6 @@
 {
-  "name": "MyWebSite",
-  "short_name": "MySite",
+  "name": "Student Interview",
+  "short_name": "Student Interview",
   "icons": [
     {
       "src": "/assets/images/web-app-manifest-192x192.png",
