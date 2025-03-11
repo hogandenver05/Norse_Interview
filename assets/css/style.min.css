@@ -20,6 +20,11 @@ input::placeholder {
     opacity: 0.5 !important
 }
 
+.list-group-item.active {
+	background-color: #565ae3 !important;
+	border-color: #4449e0 !important;
+}
+
 a {
 	text-decoration: none !important;
 	outline: none
