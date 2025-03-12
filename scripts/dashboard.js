@@ -15,13 +15,13 @@ document.addEventListener("DOMContentLoaded", function() {
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">${course.title}</h5>
-                            <p class="card-text">${course.description}</p>
+                            <p class="card-text text-muted">${course.description}</p>
                             ${isLibrary ? 
                                 `<button class="btn btn-primary add-course" data-id="${course.id}">Add to My Courses</button>` : 
                                 `<div class="d-flex justify-content-between">
                                     <button class="btn btn-primary continue-course" data-id="${course.id}">Continue now...</button>
                                     <button class="btn btn-danger drop-course" data-id="${course.id}">
-                                        <img src="assets/icons/trash.png" alt="Trash" height="20">
+                                        <img src="assets/icons/trash.png" alt="Drop Course" size="20" style="object-fit: cover; height: 20px;">
                                     </button>
                                 </div>`}
                         </div>
