@@ -11,6 +11,9 @@ document.addEventListener("DOMContentLoaded", function() {
                     <div class="card mb-4">
                         <div class="position-relative">
                             <img src="../${course.image}" class="card-img-top" alt="${course.title}">
+                            <span class="position-absolute top-0 start-0 m-2 btn btn-warning btn-round d-flex align-items-center justify-content-center" style="width: 30px; border-radius: 50%;">
+                                <img src="../assets/icons/white-pencil.png" alt="Edit Course" style="object-fit: cover; height: 20px;">
+                            </span>
                             <span class="badge bg-success position-absolute top-0 end-0 m-2">${course.completion}%</span>
                         </div>
                         <div class="card-body">
@@ -20,12 +23,9 @@ document.addEventListener("DOMContentLoaded", function() {
                                 `<button class="btn btn-primary add-course" data-id="${course.id}">Add to My Courses</button>` : 
                                 `<div class="d-flex justify-content-between">
                                     <button class="btn btn-primary continue-course" data-id="${course.id}">Continue now...</button>
-                                    <!-- TODO: Change icon from trash can to something more approachable -->
-                                    <!--
                                     <button class="btn btn-danger drop-course" data-id="${course.id}">
-                                        <img src="../assets/icons/trash.png" alt="Drop Course" style="object-fit: cover; height: 20px;">
+                                        <img src="../assets/icons/trash.png" alt="Delete Course" style="object-fit: cover; height: 20px;">
                                     </button>
-                                    -->
                                 </div>`}
                         </div>
                     </div>

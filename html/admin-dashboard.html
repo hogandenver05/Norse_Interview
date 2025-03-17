@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Administrator Dashboard</title>
     <meta name="description" content="" />
     <meta name="keywords" content="" />
 
@@ -12,9 +12,9 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/favicon/apple-touch-icon.png" />
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css">
     <!-- Custom  CSS -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.min.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/style.min.css" />
 </head>
 <body>
     <!-- START NAVBAR -->
@@ -22,9 +22,9 @@
         <div class="container">
 
             <!-- LOGO -->
-            <a class="navbar-brand logo text-uppercase" href="index.html">
-                <img src="assets/images/logo-purple.png" class="logo-dark" alt="" height="22">
-                <img src="assets/images/logo-purple.png" class="logo-light" alt="" height="22">
+            <a class="navbar-brand logo text-uppercase" href="../index.html">
+                <img src="../assets/images/logo-purple.png" class="logo-dark" alt="" height="22">
+                <img src="../assets/images/logo-purple.png" class="logo-light" alt="" height="22">
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
@@ -38,7 +38,7 @@
                         <a class="nav-link" href="#home">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">Logout</a>
+                        <a class="nav-link" href="../index.html">Logout</a>
                     </li>
                 </ul>
             </div>
@@ -54,12 +54,14 @@
                     <a href="#" class="list-group-item list-group-item-action active">Dashboard</a>
                     <a href="#" class="list-group-item list-group-item-action">Profile</a>
                     <a href="#" class="list-group-item list-group-item-action">Settings</a>
-                    <a href="index.html" class="list-group-item list-group-item-action">Logout</a>
+                    <a href="../index.html" class="list-group-item list-group-item-action">Logout</a>
                 </div>
             </div>
             <div class="col-md-9">
-                <h1>Welcome to your Dashboard</h1>
+                <h1>Welcome to your Admin Dashboard</h1>
                 <p>This is where you can manage your account and settings.</p>
+
+                <button class="btn btn-success text-uppercase mt-2 mb-4">Add New Course +</button>
                 
                 <!-- My Courses Section -->
                 <h2>My Courses</h2>
@@ -85,7 +87,7 @@
             <div class="row text-center">
                 <div class="col-md-6">
                     <div class="text-sm-start mt-3 mt-sm-0">
-                        <img src="images/logo-dark.png" alt="" height="25" />
+                        <img src="../assets/images/logo-muted.png" alt="" height="25" />
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -99,11 +101,11 @@
     <!-- END FOOTER -->
 
     <!-- bootstrap -->
-    <script src="scripts/bootstrap.bundle.min.js"></script>
+    <script src="/scripts/bootstrap.bundle.min.js"></script>
     <!-- Gumshoe -->
-    <script src="scripts/gumshoe.polyfills.min.js"></script>
+    <script src="/scripts/gumshoe.polyfills.min.js"></script>
     <!-- CUSTOM JS -->
-    <script src="scripts/app.js"></script>
-    <script src="scripts/dashboard.js"></script>
+    <script src="/scripts/app.js"></script>
+    <script src="/scripts/admin-dashboard.js"></script>
 </body>
 </html>
