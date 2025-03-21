@@ -51,6 +51,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Create course card HTML
     // TODO: I have the non-admin user layout to have the My Courses and Course Library sections, 
     // but the admin panel should just populate the course library and show edit and delete options
+
+    // FIXME: I have all the drop course functionality commented out
+    // TODO: better implement the drop course feature for regular users only
     async function createCourseCard(course, isEnrolled) {
         const admin = await isAdmin();
         return `
@@ -93,7 +96,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             // } else if (target.classList.contains('drop-course')) {
             //     await fetch(`/api/users/${currentUser}/drop/${courseId}`, { method: 'POST' });
             } else if (target.classList.contains('delete-course')) {
-                await fetch(`/api/courses/${courseId}`, { method: 'DELETE' });
+                await fetch(`/api/courses/${courseId}`, { method: 'DELETE' }); // FIXME: revamp the course deletion process
             }
             renderCourses();
         } catch (error) {
@@ -101,27 +104,29 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     });
 
-    // Admin: Add new course
-    document.getElementById('add-course-btn')?.addEventListener('click', async () => {
-        const title = prompt('Course title:');
-        const description = prompt('Description:');
-        if (title && description) {
-            await fetch('/api/courses', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ title, description, image: 'assets/images/default-course.jpg' })
-            });
-            renderCourses();
-        }
-    });
-
+    
     // Initial render
     renderCourses();
     document.querySelector('.username').textContent = currentUser;
+
     if (await isAdmin()) {
         document.getElementById('my-courses-container').parentElement.style.display = 'none';
         document.querySelector('.username').textContent += ' (Admin)';
+        
+        // Admin: Add new course // FIXME: revamp the course creation process
         document.getElementById('admin-add-course').innerHTML = `
             <button class="btn btn-success mt-2 mb-4" id="add-course-btn">Add New Course +</button>`;
+        document.getElementById('add-course-btn')?.addEventListener('click', async () => {
+            const title = prompt('Course title:');
+            const description = prompt('Description:');
+            if (title && description) {
+                await fetch('/api/courses', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ title, description, image: 'assets/images/course1.jpg' })
+                });
+                renderCourses();
+            }
+        });
     }
 });
