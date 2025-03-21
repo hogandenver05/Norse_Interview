@@ -957,7 +957,7 @@ hr {
 }
 
 .home-slider {
-	background-image: url(/assets/images/bg-1.png);
+	background-image: url(../images/bg-1.png);
 	background-position: center center;
 	background-size: cover;
 	padding: 290px 0px 270px 0px
@@ -1042,7 +1042,7 @@ hr {
 
 .bg-home-2 {
 	padding: 260px 0 250px 0;
-	background-image: url(/assets/images/bg-2.png);
+	background-image: url(../images/bg-2.png);
 	background-position: center
 }
 
@@ -1148,7 +1148,7 @@ hr {
 
 .bg-home-3 {
 	padding: 280px 0 260px 0px;
-	background-image: url(/assets/images/img-1.jpg);
+	background-image: url(../images/img-1.jpg);
 	background-size: cover;
 	background-position: center;
 	position: relative
@@ -1165,14 +1165,14 @@ hr {
 .bg-home-4 {
 	position: relative;
 	padding: 250px 0px 230px 0px;
-	background-image: url(/assets/images/bg-3.png)
+	background-image: url(../images/bg-3.png)
 }
 
 .bg-home-5 {
 	position: relative;
 	padding: 190px 0px 190px 0px;
 	min-height: 950px;
-	background-image: url(/assets/images/img-1.jpg)
+	background-image: url(../images/img-1.jpg)
 }
 
 .home-registration-form {
@@ -1200,7 +1200,7 @@ hr {
 }
 
 .bg-home-6 {
-	background-image: url(/assets/images/bg-1.png);
+	background-image: url(../images/bg-1.png);
 	background-position: center;
 	position: relative;
 	padding-top: 150px
@@ -1352,7 +1352,7 @@ hr {
 }
 
 .bg-counter {
-	background-image: url(/assets/images/img-2.jpg);
+	background-image: url(../images/img-2.jpg);
 	background-position: center
 }
 

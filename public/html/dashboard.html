@@ -58,22 +58,23 @@
                 </div>
             </div>
             <div class="col-md-9">
-                <h1>Welcome to your Dashboard</h1>
+                <h1>Welcome, <span class="username"></span></h1>
                 <p>This is where you can manage your account and settings.</p>
                 
-                <!-- My Courses Section -->
-                <h2>My Courses</h2>
-                <div class="row" id="my-courses-container">
-                    <!-- My course cards will be populated here by JavaScript -->
-                </div>
-                <!-- End My Courses Section -->
+                <!-- Admin Controls -->
+                 <div id="admin-add-course">
+                    <!-- populated by JS -->
+                 </div>
 
-                <!-- Course Library Section -->
-                <h2>Course Library</h2>
-                <div class="row" id="course-library-container">
-                    <!-- Course library cards will be populated here by JavaScript -->
+                <!-- My Courses -->
+                <div>
+                    <h2>My Courses</h2>
+                    <div class="row" id="my-courses-container"></div>
                 </div>
-                <!-- End Course Library Section -->
+
+                <!-- Course Library -->
+                <h2>Course Library</h2>
+                <div class="row" id="course-library-container"></div>
             </div>
         </div>
     </div>
