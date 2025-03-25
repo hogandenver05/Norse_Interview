@@ -49,39 +49,66 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     // Create course card HTML
-    // TODO: I have the non-admin user layout to have the My Courses and Course Library sections, 
-    // but the admin panel should just populate the course library and show edit and delete options
-
     // FIXME: I have all the drop course functionality commented out
     // TODO: better implement the drop course feature for regular users only
     async function createCourseCard(course, isEnrolled) {
         const admin = await isAdmin();
-        return `
+
+        if (admin) {
+            return `
             <div class="col-md-4 mb-4">
                 <div class="card">
-                    <div class="position-relative">
+                    <div class="card-image position-relative">
                         <img src="../${course.image}" class="card-img-top" alt="${course.title}">
-                        ${admin ? `
-                            <span class="position-absolute top-0 start-0 m-2 btn btn-warning btn-round d-flex align-items-center justify-content-center" style="width: 30px; border-radius: 50%;">
-                                <img src="../assets/icons/white-pencil.png" alt="Edit Course" style="object-fit: cover; height: 20px;">
-                            </span>` : ''}
-                        <span class="badge bg-success position-absolute top-0 end-0 m-2">${course.completion}%</span>
+                        <span class="edit-course position-absolute top-0 start-0 m-2 btn btn-warning btn-round d-flex align-items-center justify-content-center" style="width: 30px; border-radius: 50%;">
+                            <img src="../assets/icons/white-pencil.png" alt="Edit Course" style="object-fit: cover; height: 20px;">
+                        </span>
+                        <span class="delete-course position-absolute top-0 end-0 m-2 btn btn-danger btn-round d-flex align-items-center justify-content-center" style="width: 30px; border-radius: 50%;">
+                            <img src="../assets/icons/trash.png" alt="Delete Course" style="object-fit: cover; height: 20px;">
+                        </span>
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">${course.title}</h5>
                         <p class="card-text text-muted">${course.description}</p>
-                        ${isEnrolled ? `
-                            <div class="d-flex justify-content-between">
-                                <button class="btn btn-primary continue-course" data-id="${course.id}">Continue now...</button>
-                                <!--button class="btn btn-danger drop-course" data-id="${course.id}">Drop</button-->
-                                ${admin ? `<button class="btn btn-danger drop-course" data-id="${course.id}">
-                                                <img src="../assets/icons/trash.png" alt="Delete Course" style="object-fit: cover; height: 20px;">
-                                            </button>` : ''}
-                            </div>` : `
-                            <button class="btn btn-primary add-course" data-id="${course.id}">Add to My Courses</button>`}
+                        <button class="delete-course btn btn-warning" course-id="${course.id}">
+                            <img src="../assets/icons/white-pencil.png" alt="Edit Course" style="object-fit: cover; height: 20px;">
+                        </button>
+                        <button class="edit-course btn btn-danger" course-id="${course.id}">
+                            <img src="../assets/icons/trash.png" alt="Delete Course" style="object-fit: cover; height: 20px;">
+                        </button>
                     </div>
                 </div>
             </div>`;
+        }
+
+        else {
+            return `
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-image position-relative">
+                        <img src="../${course.image}" class="card-img-top" alt="${course.title}">
+                        ${isEnrolled ?
+                            `<span class="badge bg-success position-absolute top-0 end-0 m-2">${course.completion}%</span>`
+                            : 
+                            `` // if not enrolled, no completion badge
+                        }
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">${course.title}</h5>
+                        <p class="card-text text-muted">${course.description}</p>
+
+                        ${isEnrolled ?
+                            `<div class="d-flex justify-content-between">
+                                <button class="btn btn-primary continue-course" course-id="${course.id}">Continue now...</button>
+                                <!--button class="btn btn-danger drop-course" course-id="${course.id}">Drop</button-->
+                            </div>`
+                            :
+                            `<button class="btn btn-primary add-course" course-id="${course.id}">Add to My Courses</button>`
+                        }
+                    </div>
+                </div>
+            </div>`;
+        }
     }
 
     // Event listeners
@@ -96,7 +123,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             // } else if (target.classList.contains('drop-course')) {
             //     await fetch(`/api/users/${currentUser}/drop/${courseId}`, { method: 'POST' });
             } else if (target.classList.contains('delete-course')) {
-                await fetch(`/api/courses/${courseId}`, { method: 'DELETE' }); // FIXME: revamp the course deletion process
+                await fetch(`/api/courses/${courseId}`, { method: 'DELETE' }); // FIXME: revamp the course deletion process ('Are you sure?' prompt)
             }
             renderCourses();
         } catch (error) {
@@ -113,7 +140,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         document.getElementById('my-courses-container').parentElement.style.display = 'none';
         document.querySelector('.username').textContent += ' (Admin)';
         
-        // Admin: Add new course // FIXME: revamp the course creation process
+        // Admin: Add new course // FIXME: revamp the course creation process (Add a modal)
         document.getElementById('admin-add-course').innerHTML = `
             <button class="btn btn-success mt-2 mb-4" id="add-course-btn">Add New Course +</button>`;
         document.getElementById('add-course-btn')?.addEventListener('click', async () => {
