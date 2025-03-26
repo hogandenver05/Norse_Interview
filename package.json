@@ -21,8 +21,6 @@
   "homepage": "https://github.com/hogandenver05/Student_Interview#readme",
   "dependencies": {
     "body-parser": "^1.20.3",
-    "express": "^4.21.2",
-    "lowdb": "^7.0.1",
     "node-fetch": "^3.3.2"
   }
 }

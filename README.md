@@ -1,4 +1,4 @@
-# Student Interview
+# Norse Interview
 A career help hub for college students looking to secure their next job. 
 
 ### Contributors:
@@ -15,8 +15,8 @@ For our midterm project in ASE 230, we were tasked to team up with our peers and
 - **Resource Library**: Courses, videos, and other resources to help students prepare for interviews and job applications.
 
 ### Instructions:
-1. **Clone the Repository**: `git clone https://github.com/yourusername/Student_Interview.git`
-2. **Navigate to the Project Directory**: `cd Student_Interview`
+1. **Clone the Repository**: `git clone https://github.com/yourusername/Norse_Interview.git`
+2. **Navigate to the Project Directory**: `cd Norse_Interview`
 3. **Install Dependencies**: `npm install`
 4. **Run the Application**: `npm start`
 5. **Access the Application**: Open your browser and go to `http://localhost:3000`

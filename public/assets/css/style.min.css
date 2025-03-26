@@ -3,7 +3,7 @@
 body {
 	font-family: "Open Sans", sans-serif;
 	line-height: 30px;
-	color: #1d2a5f
+	color: #000
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -21,8 +21,8 @@ input::placeholder {
 }
 
 .list-group-item.active {
-	background-color: #565ae3 !important;
-	border-color: #4449e0 !important;
+	background-color: #FFC72C !important;
+	border-color: #FFED52 !important;
 }
 
 a {
@@ -78,7 +78,7 @@ p {
 }
 
 .color-overlay {
-	background-color: #565ae3;
+	background-color: #FFC72C;
 	opacity: .9;
 	position: absolute;
 	height: 100%;
@@ -88,7 +88,7 @@ p {
 }
 
 .overlay-gradient {
-	background: linear-gradient(to right, #4763cb, #565ae3);
+	background: linear-gradient(to right, #4763cb, #FFC72C);
 	opacity: .9;
 	position: absolute;
 	height: 100%;
@@ -216,7 +216,7 @@ hr {
 }
 
 .bg-primary {
-	background-color: #565ae3 !important
+	background-color: #FFC72C !important
 }
 
 .bg-soft-primary {
@@ -224,41 +224,41 @@ hr {
 }
 
 .text-primary {
-	color: #565ae3 !important
+	color: #FFC72C !important
 }
 
 .border-primary {
-	color: #565ae3 !important
+	color: #FFC72C !important
 }
 
 .btn-soft-primary {
 	background-color: rgba(86, 90, 227, .25) !important;
-	color: #565ae3 !important
+	color: #FFC72C !important
 }
 
 .btn-soft-primary:hover, .btn-soft-primary:focus, .btn-soft-primary:active, .btn-soft-primary.active, .btn-soft-primary.focus, .btn-soft-primary:not(:disabled):not(.disabled):active, .btn-soft-primary:not(:disabled):not(.disabled):active:focus, .btn-soft-primary .open>.dropdown-toggle.btn-primary {
-	background: #4449e0
+	background: #FFED52
 }
 
 .btn-primary {
-	background: #565ae3;
-	border-color: #565ae3 !important;
-	color: #fff !important
+	background: #FFC72C;
+	border-color: #FFC72C !important;
+	color: #000 !important
 }
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .btn-primary.focus, .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary .open>.dropdown-toggle.btn-primary {
-	background: #4449e0;
-	border-color: #4449e0
+	background: #FFED52;
+	border-color: #FFED52 !important
 }
 
 .btn-outline-primary {
-	color: #565ae3;
-	border-color: #565ae3
+	color: #FFC72C;
+	border-color: #FFC72C
 }
 
 .btn-outline-primary:hover, .btn-outline-primary:focus, .btn-outline-primary:active, .btn-outline-primary.active, .btn-outline-primary.focus, .btn-outline-primary:not(:disabled):not(.disabled):active, .btn-outline-primary:not(:disabled):not(.disabled):active:focus, .btn-outline-primary .open>.dropdown-toggle.btn-primary {
-	background: #565ae3;
-	border-color: #565ae3
+	background: #FFC72C;
+	border-color: #FFC72C
 }
 
 .bg-success {
@@ -492,7 +492,7 @@ hr {
 }
 
 .bg-dark {
-	background-color: #1d2a5f !important
+	background-color: #000 !important
 }
 
 .bg-soft-dark {
@@ -500,16 +500,16 @@ hr {
 }
 
 .text-dark {
-	color: #1d2a5f !important
+	color: #000 !important
 }
 
 .border-dark {
-	color: #1d2a5f !important
+	color: #000 !important
 }
 
 .btn-soft-dark {
 	background-color: rgba(29, 42, 95, .25) !important;
-	color: #1d2a5f !important
+	color: #000 !important
 }
 
 .btn-soft-dark:hover, .btn-soft-dark:focus, .btn-soft-dark:active, .btn-soft-dark.active, .btn-soft-dark.focus, .btn-soft-dark:not(:disabled):not(.disabled):active, .btn-soft-dark:not(:disabled):not(.disabled):active:focus, .btn-soft-dark .open>.dropdown-toggle.btn-primary {
@@ -517,8 +517,8 @@ hr {
 }
 
 .btn-dark {
-	background: #1d2a5f;
-	border-color: #1d2a5f !important;
+	background: #000;
+	border-color: #000 !important;
 	color: #fff !important
 }
 
@@ -528,13 +528,13 @@ hr {
 }
 
 .btn-outline-dark {
-	color: #1d2a5f;
-	border-color: #1d2a5f
+	color: #000;
+	border-color: #000
 }
 
 .btn-outline-dark:hover, .btn-outline-dark:focus, .btn-outline-dark:active, .btn-outline-dark.active, .btn-outline-dark.focus, .btn-outline-dark:not(:disabled):not(.disabled):active, .btn-outline-dark:not(:disabled):not(.disabled):active:focus, .btn-outline-dark .open>.dropdown-toggle.btn-primary {
-	background: #1d2a5f;
-	border-color: #1d2a5f
+	background: #000;
+	border-color: #000
 }
 
 .bg-cyan {
@@ -884,7 +884,7 @@ hr {
 	font-size: 24px;
 	margin-top: 5px;
 	margin-bottom: 0px;
-	color: #1d2a5f
+	color: #000
 }
 
 .navbar-custom.nav-sticky .custom-menu {
@@ -916,11 +916,11 @@ hr {
 }
 
 .navbar-custom.navbar-white .navbar-nav li a, .navbar-custom.navbar-white .navbar-brand, .navbar-white .navbar-toggle {
-	color: #1d2a5f !important
+	color: #000 !important
 }
 
 .navbar-custom.navbar-white .navbar-nav li.active a, .navbar-custom.navbar-white .navbar-nav li a:hover, .navbar-custom.navbar-white .navbar-nav li a:focus, .navbar-custom.navbar-white .navbar-nav li a:active {
-	color: #565ae3 !important
+	color: #FFC72C !important
 }
 
 .nav-sticky.navbar-custom {
@@ -935,15 +935,15 @@ hr {
 }
 
 .nav-sticky .logo {
-	color: #1d2a5f !important
+	color: #000 !important
 }
 
 .nav-sticky .navbar-nav li a {
-	color: #1d2a5f !important
+	color: #000 !important
 }
 
 .nav-sticky.navbar-custom .navbar-nav li.active a, .nav-sticky.navbar-custom .navbar-nav li a:hover, .nav-sticky.navbar-custom .navbar-nav li a:focus, .nav-sticky.navbar-custom .navbar-nav li a:active {
-	color: #565ae3 !important
+	color: #FFC72C !important
 }
 
 .nav-sticky.navbar-custom .navbar-toggles {
@@ -1034,8 +1034,8 @@ hr {
 	left: 0;
 	right: 0;
 	margin: 0 auto;
-	background: #565ae3;
-	color: #fff;
+	background: #FFC72C;
+	color: #000;
 	border-radius: 50%;
 	font-size: 22px
 }
@@ -1196,7 +1196,7 @@ hr {
 }
 
 .registration-form .registration-input-box:focus {
-	border-color: #565ae3
+	border-color: #FFC72C
 }
 
 .bg-home-6 {
@@ -1298,11 +1298,11 @@ hr {
 }
 
 .nav-tabs>li>a, .nav-pills>li>a {
-	color: #1d2a5f
+	color: #000
 }
 
 .nav-pills>a {
-	color: #1d2a5f
+	color: #000
 }
 
 .pricing-tab-border {
@@ -1310,7 +1310,7 @@ hr {
 }
 
 .nav-link.active, .show>.nav-link {
-	background-color: #565ae3 !important
+	background-color: #FFC72C !important
 }
 
 .nav-pills .nav-link {
@@ -1324,7 +1324,7 @@ hr {
 
 .nav-tabs-custom .nav-item {
 	position: relative;
-	color: #1d2a5f
+	color: #000
 }
 
 .nav-tabs-custom .nav-item .nav-link {
@@ -1333,7 +1333,7 @@ hr {
 
 .nav-tabs-custom .nav-item .nav-link::after {
 	content: "";
-	background: #565ae3;
+	background: #FFC72C;
 	height: 2px;
 	position: absolute;
 	width: 100%;
@@ -1344,7 +1344,7 @@ hr {
 }
 
 .nav-tabs-custom .nav-item .nav-link.active {
-	color: #565ae3
+	color: #FFC72C
 }
 
 .nav-tabs-custom .nav-item .nav-link.active:after {
@@ -1443,7 +1443,7 @@ textarea.form-control {
 	.navbar-custom .navbar-nav li a {
 		transition: all .4s;
 		margin: 6px;
-		color: #1d2a5f !important;
+		color: #000 !important;
 		padding: 6px 0
 	}
 
@@ -1456,11 +1456,11 @@ textarea.form-control {
 	}
 
 	.navbar-white .navbar-toggler {
-		color: #1d2a5f !important
+		color: #000 !important
 	}
 
 	.navbar-custom .navbar-nav li.active a, .navbar-custom .navbar-nav li a:hover, .navbar-custom .navbar-nav li a:active {
-		color: #565ae3 !important
+		color: #FFC72C !important
 	}
 
 	.navbar-toggler {
