@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Norse Interview</title>
+    <title>Courses</title>
     <meta name="description" content="" />
     <meta name="keywords" content="" />
 
@@ -38,7 +38,7 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav ms-auto" id="navbar-navlist">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Dashboard</a>
+                        <a class="nav-link" href="#">Courses</a>
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">Profile</a>
@@ -55,30 +55,39 @@
     </nav>
     <!-- END NAVBAR -->
 
-    <!-- START DASHBOARD -->
-    <div class="container mt-5 pt-5 pb-5">
+    <!-- START COURSES -->
+    <div class="container mt-5 pt-5">
         <div class="row">
-            <div class="col m-2">
-                <div class="card h-100">
-                    <div class="card-body d-flex flex-column">
-                        <h3 class="card-title">Interview Practice</h3>
-                        <p class="card-text text-muted flex-grow-1">${course.description}</p>
-                        <button class="btn btn-primary">Go</button>
-                    </div>
+            <div class="col-md-2 me-5">
+                <div class="list-group">
+                    <a href="#" class="list-group-item list-group-item-action active">Courses</a>
+                    <a href="#" class="list-group-item list-group-item-action">Profile</a>
+                    <a href="#" class="list-group-item list-group-item-action">Settings</a>
+                    <a href="../index.html" class="list-group-item list-group-item-action">Logout</a>
                 </div>
             </div>
-            <div class="col m-2">
-                <div class="card h-100">
-                    <div class="card-body d-flex flex-column">
-                        <h3 class="card-title">Best Practice</h3>
-                        <p class="card-text text-muted flex-grow-1">${course.description}</p>
-                        <button class="btn btn-primary">Go</button>
-                    </div>
+            <div class="col-md-9">
+                <h1>Welcome, <span class="username"></span></h1>
+                <p>This is where you can manage your account and settings.</p>
+                
+                <!-- Admin Controls -->
+                 <div id="admin-add-course">
+                    <!-- populated by JS -->
+                 </div>
+
+                <!-- My Courses -->
+                <div>
+                    <h2>My Courses</h2>
+                    <div class="row" id="my-courses-container"></div>
                 </div>
+
+                <!-- Course Library -->
+                <h2>Course Library</h2>
+                <div class="row" id="course-library-container"></div>
             </div>
         </div>
     </div>
-    <!-- END DASHBOARD -->
+    <!-- END COURSES -->
 
     <!-- START FOOTER -->
     <section class="bg-footer bg-light">
@@ -105,6 +114,6 @@
     <script src="../scripts/gumshoe.polyfills.min.js"></script>
     <!-- CUSTOM JS -->
     <script src="../scripts/app.js"></script>
-    <script src="../scripts/dashboard.js"></script>
+    <script src="../scripts/courses.js"></script>
 </body>
 </html>
