@@ -4,41 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Norse Interview</title>
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
+    <meta name="description" content="NKU's premier interview preparation platform" />
+    <meta name="keywords" content="NKU, interview, career, preparation, Norse" />
 
     <link rel="shortcut icon" href="assets/icons/favicon/favicon.ico" />
     <link rel="icon" type="image/png" href="assets/icons/favicon/favicon-96x96.png" sizes="96x96" />
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
-    <!-- Custom  CSS -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.min.css" />
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/index.css">
 </head>
 <body>
     <!-- START NAVBAR -->
-    <nav class="navbar navbar-expand-lg fixed-top navbar-custom sticky sticky-light" id="navbar">
+    <nav class="navbar navbar-expand-lg fixed-top navbar-custom" id="navbar">
         <div class="container">
-
             <!-- LOGO -->
-            <a class="navbar-brand logo text-uppercase" href="#">
-                <img src="assets/images/full-logo-black.png" class="logo-light" alt="" height="50">
-                <img src="assets/images/full-logo-white.png" class="logo-dark" alt="" height="50">
-            </a>
-            <a class="navbar-brand logo text-uppercase" href="#">
-                <img src="assets/images/norse-white.png" class="logo-light" alt="" height="30">
-                <img src="assets/images/norse.png" class="logo-dark" alt="" height="30">
+            <a class="navbar-brand" href="#">
+                <img src="assets/images/full-logo-white.png" alt="NKU Logo" height="50">
+                <img src="assets/images/norse-white.png" alt="Norse Logo" height="30">
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span>☰</span>
+                <i class="fas fa-bars"></i>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav ms-auto" id="navbar-navlist">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#home">Home</a>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#services">Services</a>
@@ -47,7 +44,7 @@
                         <a class="nav-link" href="#contact">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="html/dashboard.html">Login</a>
+                        <a class="nav-link" href="html/landing.html">Login</a>
                     </li>
                 </ul>
             </div>
@@ -61,57 +58,27 @@
         <div class="container">
             <div class="row justify-content-center align-items-center">
                 <div class="col-lg-6">
-                    <div class="text-white mt-4">
-                        <h1 class="">Ready To Nail That Interview?</h1>
-                        <p class="home-subtitle pt-4 mx-auto">You came to the right place. Norse Interview is your one-stop-shop for 
+                    <div class="text-white">
+                        <h1>Ready To Nail That Interview?</h1>
+                        <p class="home-subtitle">You came to the right place. Norse Interview is your one-stop-shop for 
                             all things career prep. From interview prep courses to AI interview evaluations, we have everything you need 
                             to land your dream job.</p>
-                        </p>
-
-                        <!--
-                            <div class="pt-4 mt-3">
-                                <a href="html/dashboard.html" class="btn btn-primary btn-round text-uppercase">Get Started Now <i style="padding-left: 10px;">►</i></a>
-                            </div>
-                        -->
                     </div>
                 </div>
 
                 <div class="col-lg-5 offset-lg-1">
-                    <div class="home-registration-form bg-white mt-4">
-                        <h5 class="form-title mb-3 text-center f-w-bold">Log In With Your NKU Email</h5>
+                    <div class="home-registration-form">
+                        <h5 class="form-title text-center">Log In With Your NKU Email</h5>
                         <form class="registration-form">
-
-                            <label class="text-muted">Email</label>
-                            <input type="email" id="inputEmail" placeholder="doej1@nku.edu" class="form-control mb-3 registration-input-box">
-                            <label class="text-muted">Password</label>
-                            <input type="text" id="inputPassword" placeholder="********" class="form-control mb-3 registration-input-box">
-                            <a href="html/dashboard.html" class="btn btn-primary w-100 mt-3">Let's Get Started!</a>
-                            
-                            <!--
-                            
-                            
-                            <p class="sub-title text-center text-primary mt-2 pt-2 f-15">or log in with</p>
-                            
-                            <div class="contact-social text-center">
-                                <ul class="list-inline mb-0">
-                                    <li class="list-inline-item">
-                                        <a href="html/dashboard.html" class="text-reset"><i class="logo-icon"><img src="assets/icons/facebook.png"></i></a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="html/dashboard.html" class="text-reset"><i class="logo-icon"><img src="assets/icons/twitter.png"></i></a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="html/dashboard.html" class="text-reset"><i class="logo-icon"><img src="assets/icons/google.png"></i></a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="html/dashboard.html" class="text-reset"><i class="logo-icon"><img src="assets/icons/pinterest.png"></i></a>
-                                    </li>
-                                </ul>
+                            <div class="mb-3">
+                                <label class="form-label">Email</label>
+                                <input type="email" id="inputEmail" placeholder="doej1@nku.edu" class="form-control registration-input-box">
                             </div>
-
-
-                            -->
-
+                            <div class="mb-3">
+                                <label class="form-label">Password</label>
+                                <input type="password" id="inputPassword" placeholder="********" class="form-control registration-input-box">
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Let's Get Started!</button>
                         </form>
                     </div>
                 </div>
@@ -119,7 +86,7 @@
         </div>
 
         <div class="home-arrow">
-            <a href="#services"><i class="btn-primary">▼</i></a>
+            <a href="#services"><i class="fas fa-chevron-down"></i></a>
         </div>
     </section>
     <!-- END HOME -->
@@ -130,55 +97,48 @@
             <div class="row justify-content-center">
                 <div class="col-lg-7">
                     <div class="title-box text-center">
-                        <p class="sub-title text-primary f-15 text-uppercase mb-0">What We Offer</p>
-                        <h3 class="title mt-3">Refine Your Talents With Our Expert Guidance and Resources</h3>
+                        <p class="sub-title text-uppercase mb-2">What We Offer</p>
+                        <h3 class="title">Refine Your Talents With Our Expert Guidance</h3>
                     </div>
                 </div>
             </div>
 
-            <div class="row mt-5 pt-4">
+            <div class="row mt-5">
                 <div class="col-lg-4">
-                    <div class="services-box text-center mt-4">
-                        <div class="services-img mt-4">
-                            <img src="assets/icons/layers.png" class="img-fluid" alt="">
+                    <div class="services-box text-center">
+                        <div class="services-img">
+                            <img src="assets/icons/layers.png" alt="Courses Icon">
                         </div>
-                        <h5 class="mt-4">Interview Prep Courses</h5>
-                        <p class="text-muted text-sm-start mt-3">Our comprehensive interview prep courses cover 
+                        <h5>Interview Prep Courses</h5>
+                        <p class="text-muted mt-3">Our comprehensive interview prep courses cover 
                             everything from resume building to mock interviews, ensuring you are prepared for your 
                             next big opportunity.</p>
-                        <div class="mt-4">
-                            <a href="" class="read-more text-primary f-15">Browse Our Library →</a>
-                        </div>
+                        <a href="#" class="read-more">Browse Our Library <i class="fas fa-arrow-right ms-1"></i></a>
                     </div>
                 </div>
 
                 <div class="col-lg-4">
-                    <div class="services-box text-center mt-4">
-                        <div class="services-img mt-4">
-                            <img src="assets/icons/monitor.png" class="img-fluid" alt="">
+                    <div class="services-box text-center">
+                        <div class="services-img">
+                            <img src="assets/icons/monitor.png" alt="AI Icon">
                         </div>
-                        <h5 class="mt-4">AI Interview Evaluation</h5>
-                        <p class="text-muted text-sm-start mt-3">Our AI Interview Evaluation service provides 
+                        <h5>AI Interview Evaluation</h5>
+                        <p class="text-muted mt-3">Our AI Interview Evaluation service provides 
                             personalized feedback on your performance. We analyze responses, body language, and 
-                            more to help you improve and succeed in your interviews.</p>
-                        <div class="mt-4">
-                            <a href="" class="read-more text-primary f-15">Try It Yourself →</a>
-                        </div>
+                            more to help you improve.</p>
+                        <a href="#" class="read-more">Try It Yourself <i class="fas fa-arrow-right ms-1"></i></a>
                     </div>
                 </div>
 
                 <div class="col-lg-4">
-                    <div class="services-box text-center mt-4">
-                        <div class="services-img mt-4">
-                            <img src="assets/icons/headphones.png" class="img-fluid" alt="">
+                    <div class="services-box text-center">
+                        <div class="services-img">
+                            <img src="assets/icons/headphones.png" alt="Support Icon">
                         </div>
-                        <h5 class="mt-4">Awesome Support</h5>
-                        <p class="text-muted text-sm-start mt-3">Our dedicated support team is available 24/7 to assist you with 
-                            any questions or issues you may have. Reach out to us 
-                            anytime, and we'll ensure you get the support you need to succeed.</p>
-                        <div class="mt-4">
-                            <a href="" class="read-more text-primary f-15">Read More →</a>
-                        </div>
+                        <h5>Awesome Support</h5>
+                        <p class="text-muted mt-3">Our dedicated support team is available 24/7 to assist you with 
+                            any questions or issues you may have. We're here to ensure your success.</p>
+                        <a href="#" class="read-more">Contact Us <i class="fas fa-arrow-right ms-1"></i></a>
                     </div>
                 </div>
             </div>
@@ -190,59 +150,10 @@
     <section class="section bg-counter">
         <div class="color-overlay"></div>
         <div class="container">
-
             <div class="row justify-content-center">
                 <div class="col-lg-6">
                     <div class="text-center text-white">
-                        <h3>Let's let the numbers do the talking...</h3>
-                    </div>
-                </div>
-            </div>
-            <div class="row mt-5 pt-4">
-                <div class="col-lg-4">
-                    <div class="counter-box text-center mt-4 mt-lg-0">
-
-                        <div class="counter-img">
-                            <img src="assets/icons/presentation.png" class="img-fluid" alt="">
-                        </div>
-
-                        <h1 class="text-white mt-4">
-                            <span class="counter_value mt-3" data-target="4080">0</span>
-                            <span>+</span>
-                        </h1>
-                        <p class="text-white mb-0 mt-2 text-uppercase">Students Enrolled</p>
-                    </div>
-                </div>
-
-                <div class="col-lg-4">
-                    <div class="counter-box text-center mt-4 mt-lg-0">
-
-                        <div class="counter-img">
-                            <img src="assets/icons/briefcase.png" class="img-fluid" alt="">
-                        </div>
-
-                        <h1 class="text-white mt-4">
-                            <span class="counter_value mt-3" data-target="2500">0</span>
-                            <span>+</span>
-                        </h1>
-
-                        <p class="text-white mb-0 mt-2 text-uppercase">Jobs Secured</p>
-                    </div>
-                </div>
-
-                <div class="col-lg-4">
-                    <div class="counter-box text-center mt-4 mt-lg-0">
-
-                        <div class="counter-img">
-                            <img src="assets/icons/calendar.png" class="img-fluid" alt="">
-                        </div>
-
-                        <h1 class="text-white mt-4">
-                            <span class="counter_value mt-3" data-target="15">15</span>
-                            <span>+</span>
-                        </h1>
-
-                        <p class="text-white mb-0 mt-2 text-uppercase">Years of Experience</p>
+                        <h3 class="mb-4">Let the numbers do the talking...</h3>
                     </div>
                 </div>
             </div>
@@ -253,103 +164,113 @@
     <!-- START CONTACT -->
     <section class="section" id="contact">
         <div class="container">
-
             <div class="row justify-content-center">
                 <div class="col-lg-7">
                     <div class="title-box text-center">
-                        <p class="sub-title text-primary f-15 text-uppercase mb-0">Contact US</p>
-                        <h3 class="title mt-3">Questions? Comments? Concerns?</h3>
+                        <p class="sub-title text-uppercase mb-2">Contact Us</p>
+                        <h3 class="title">Questions? Comments? Concerns?</h3>
                     </div>
                 </div>
             </div>
 
-            <div class="row mt-5 pt-4">
+            <div class="row mt-5">
                 <div class="col-lg-4">
+                    <div class="contact-info">
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="contact-img">
+                                <img src="assets/icons/call.png" alt="Phone">
+                            </div>
+                            <div class="ms-3">
+                                <p class="text-muted mb-1">(859) 572-5100</p>
+                                <p class="text-muted mb-0">(859) 572-6464</p>
+                            </div>
+                        </div>
 
-                    <div class="d-flex mt-4">
-                        <div class="contact-img mt-3 me-3">
-                            <img src="assets/icons/call.png" class="img-fluid" alt="">
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="contact-img">
+                                <img src="assets/icons/postal.png" alt="Email">
+                            </div>
+                            <div class="ms-3">
+                                <p class="text-muted mb-1">admissions@nku.edu</p>
+                                <p class="text-muted mb-0">support@nku.edu</p>
+                            </div>
                         </div>
-                        <div class="flex-1">
-                            <p class="text-muted mb-0"> (098) 407-854-0933</p>
-                            <p class="text-muted mb-0"> (098) 708-263-8587</p>
-                        </div>
-                    </div>
 
-                    <div class="d-flex mt-4">
-                        <div class="contact-img mt-3 me-3">
-                            <img src="assets/icons/postal.png" class="img-fluid" alt="">
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="contact-img">
+                                <img src="assets/icons/pinpoint.png" alt="Location">
+                            </div>
+                            <div class="ms-3">
+                                <p class="text-muted mb-0">Nunn Drive<br>Highland Heights, KY 41099</p>
+                            </div>
                         </div>
-                        <div class="flex-1">
-                            <p class="text-muted mb-0"> LeeMMehta@rhyta.com</p>
-                            <p class="text-muted mb-0"> JamesMCalderon@rhyta.com</p>
-                        </div>
-                    </div>
 
-                    <div class="d-flex mt-4">
-                        <div class="contact-img mt-3 me-3">
-                            <img src="assets/icons/pinpoint.png" class="img-fluid" alt="">
+                        <div class="contact-social">
+                            <ul class="list-inline">
+                                <li class="list-inline-item">
+                                    <a href="https://www.facebook.com/nkuedu" target="_blank" class="text-reset">
+                                        <div class="logo-icon">
+                                            <img src="assets/icons/facebook.png" alt="Facebook">
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="https://twitter.com/nkuedu" target="_blank" class="text-reset">
+                                        <div class="logo-icon">
+                                            <img src="assets/icons/twitter.png" alt="Twitter">
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="https://www.instagram.com/nkuedu" target="_blank" class="text-reset">
+                                        <div class="logo-icon">
+                                            <img src="assets/icons/google.png" alt="Instagram">
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="https://www.linkedin.com/school/northern-kentucky-university" target="_blank" class="text-reset">
+                                        <div class="logo-icon">
+                                            <img src="assets/icons/pinterest.png" alt="LinkedIn">
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
-                        <div class="flex-1">
-                            <p class="text-muted mb-0"> 2189 Whispering Pineass Hiney Road Circle
-                                Allen, TX 75002</p>
-                        </div>
-                    </div>
-
-
-                    <div class="contact-social mt-4 pt-2">
-                        <ul class="list-inline mb-0">
-                            <li class="list-inline-item">
-                                <a href="https://www.facebook.com" class="text-reset"><i class="logo-icon"><img src="assets/icons/facebook.png"></i></a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="https://www.twitter.com" class="text-reset"><i class="logo-icon"><img src="assets/icons/twitter.png"></i></a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="https://www.google.com" class="text-reset"><i class="logo-icon"><img src="assets/icons/google.png"></i></a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="https://www.pinterest.com" class="text-reset"><i class="logo-icon"><img src="assets/icons/pinterest.png"></i></a>
-                            </li>
-                        </ul>
                     </div>
                 </div>
 
                 <div class="col-lg-8">
-
-                    <div class="custom-form mt-4">
+                    <div class="custom-form">
                         <form method="post" name="myForm" onsubmit="return validateForm()">
-                            <p id="error-msg"></p>
+                            <div id="error-msg"></div>
                             <div id="simple-msg"></div>
                             <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="form-group mt-2">
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
                                         <input name="name" id="name" type="text" class="form-control"
-                                            placeholder="Your name">
+                                            placeholder="Your name*" required>
                                     </div>
                                 </div>
-
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="form-group mt-2">
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
                                         <input name="email" id="email" type="email" class="form-control"
-                                            placeholder="Your email">
+                                            placeholder="Your email*" required>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <div class="form-group mt-2">
+                                    <div class="mb-3">
                                         <textarea name="comments" id="comments" rows="4" class="form-control"
-                                            placeholder="Your message..."></textarea>
+                                            placeholder="Your message*" required></textarea>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row mt-2">
+                            <div class="row">
                                 <div class="col-lg-12">
-                                    <input type="submit" id="submit" name="send"
-                                        class="submitBnt btn btn-rounded btn-primary" value="Send Message">
+                                    <button type="submit" id="submit" name="send"
+                                        class="btn btn-primary submitBnt">Send Message</button>
                                 </div>
                             </div>
                         </form>
@@ -361,29 +282,26 @@
     <!-- END CONTACT -->
 
     <!-- START FOOTER -->
-    <section class="bg-footer bg-light">
+    <footer class="bg-footer">
         <div class="container">
-            <div class="row text-center">
+            <div class="row align-items-center">
                 <div class="col-md-6">
-                    <div class="text-sm-start mt-3 mt-sm-0">
-                        <img src="assets/images/logo-muted.png" alt="" height="25" />
+                    <div class="text-md-start">
+                        <img src="assets/images/full-logo-white.png" alt="NKU Logo">
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="text-sm-end mt-3 mt-sm-0">
-                        <p class="text-muted mb-0">2025 © Norse Interview.</p>
+                    <div class="text-md-end mt-4 mt-md-0">
+                        <p>© 2024 Norse Interview. All rights reserved.</p>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </footer>
     <!-- END FOOTER -->
 
-    <!-- bootstrap -->
-    <script src="scripts/bootstrap.bundle.min.js"></script>
-    <!-- Gumshoe -->
-    <script src="scripts/gumshoe.polyfills.min.js"></script>
-    <!-- CUSTOM JS -->
-    <script src="scripts/app.js"></script>
+    <!-- Bootstrap Bundle JS -->
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
 </body>
-<html>
+</html>
+</html>
