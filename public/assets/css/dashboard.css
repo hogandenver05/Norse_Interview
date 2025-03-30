@@ -1,62 +1,178 @@
+/* NKU Theme Variables */
 :root {
-    --primary-color: #2c3e50;
-    --secondary-color: #3498db;
-    --accent-color: #e74c3c;
-    --light-bg: #f8f9fa;
-    --dark-bg: #2c3e50;
-}
-
-body {
-    background-color: var(--light-bg);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --nku-black: #000000;
+    --nku-yellow: #ffd204;
+    --nku-gold: #c6a052;
+    --nku-white: #ffffff;
+    --nku-gray: #f4f4f4;
 }
 
 /* Navbar Styles */
 .navbar {
-    background: white !important;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background: var(--nku-black) !important;
     padding: 1rem 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1030;
 }
 
 .navbar-brand {
+    color: var(--nku-white) !important;
+    font-weight: 700;
+    font-size: 1.5rem;
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.75rem;
+}
+
+.navbar-brand img {
+    height: 40px;
+    width: auto;
+}
+
+.navbar-toggler {
+    border: none;
+    padding: 0.5rem;
+    color: var(--nku-yellow);
+}
+
+.navbar-toggler:focus {
+    box-shadow: none;
+    outline: 2px solid var(--nku-yellow);
+    outline-offset: 2px;
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 210, 4, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+}
+
+.navbar-nav {
+    margin-left: auto;
+    gap: 0.5rem;
 }
 
 .nav-link {
-    color: var(--primary-color) !important;
+    color: var(--nku-white) !important;
     font-weight: 500;
     padding: 0.5rem 1rem !important;
     transition: all 0.3s ease;
+    position: relative;
+    font-size: 1rem;
 }
 
-.nav-link:hover {
-    color: var(--secondary-color) !important;
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--nku-yellow);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
 }
 
-/* Dashboard Layout */
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: calc(100% - 2rem);
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--nku-yellow) !important;
+}
+
+.dropdown-menu {
+    background: var(--nku-black);
+    border: 1px solid rgba(255, 210, 4, 0.1);
+    border-radius: 12px;
+    padding: 0.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    margin-top: 0.5rem;
+}
+
+.dropdown-item {
+    color: var(--nku-white);
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+    background: rgba(255, 210, 4, 0.1);
+    color: var(--nku-yellow);
+}
+
+.dropdown-item.active,
+.dropdown-item:active {
+    background: var(--nku-yellow);
+    color: var(--nku-black);
+}
+
+.navbar-collapse {
+    transition: all 0.3s ease;
+}
+
+@media (max-width: 991.98px) {
+    .navbar-collapse {
+        background: var(--nku-black);
+        padding: 1rem;
+        border-radius: 12px;
+        margin-top: 1rem;
+    }
+
+    .nav-link::after {
+        display: none;
+    }
+
+    .nav-link {
+        padding: 0.75rem 1rem !important;
+        border-radius: 8px;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+        background: rgba(255, 210, 4, 0.1);
+    }
+
+    .dropdown-menu {
+        border: none;
+        background: transparent;
+        box-shadow: none;
+        padding: 0;
+        margin-top: 0;
+        margin-left: 1rem;
+    }
+
+    .dropdown-item {
+        padding: 0.75rem 1rem;
+    }
+}
+
+/* Dashboard Container */
 .dashboard-container {
-    margin-top: 6rem;
-    padding: 2rem 0;
-    width: 100%;
+    padding-top: 5rem;
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--nku-black) 0%, #1a1a1a 100%);
 }
 
 .main-content {
-    background: white;
-    padding: 0;
-    width: 100%;
+    padding: 2rem 0;
 }
 
 /* Welcome Section */
 .welcome-section {
-    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
-    color: white;
-    padding: 2.5rem;
-    margin-bottom: 2rem;
+    background: linear-gradient(135deg, var(--nku-black) 0%, #1a1a1a 100%);
+    padding: 3rem 2rem;
+    border-radius: 20px;
+    margin-bottom: 3rem;
     position: relative;
     overflow: hidden;
-    border-radius: 0;
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
 }
 
 .welcome-section::before {
@@ -65,46 +181,75 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
-    background: url('../images/pattern.png') repeat;
-    opacity: 0.1;
+    height: 4px;
+    background: var(--nku-yellow);
 }
 
 .welcome-section h1 {
+    color: var(--nku-white);
     font-size: 2.5rem;
+    font-weight: 700;
     margin-bottom: 1rem;
-    position: relative;
-    z-index: 1;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 }
 
 .welcome-section p {
-    position: relative;
-    z-index: 1;
-    font-size: 1.1rem;
-    opacity: 0.9;
+    color: var(--nku-yellow);
+    font-size: 1.2rem;
+    margin: 0;
+    font-weight: 500;
 }
 
-/* Card Styles */
+/* Section Titles */
+.section-title {
+    color: var(--nku-white);
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.section-title i {
+    color: var(--nku-yellow);
+}
+
+/* Course Cards */
 .card {
+    background: var(--nku-white);
     border: none;
     border-radius: 20px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-    transition: all 0.3s ease;
-    margin-bottom: 1.5rem;
     overflow: hidden;
-    background: white;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    height: 100%;
     position: relative;
 }
 
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+    transform: translateY(-10px);
+    box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.3);
+}
+
+.card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--nku-yellow);
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+}
+
+.card:hover::after {
+    transform: scaleX(1);
 }
 
 .card-image {
     position: relative;
-    width: 100%;
-    height: 300px;
+    height: 200px;
     overflow: hidden;
 }
 
@@ -119,643 +264,7 @@ body {
     transform: scale(1.05);
 }
 
-/* Card Overlay */
-.card-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.2), transparent);
-    padding: 2rem 1.5rem 1.5rem;
-    transition: all 0.3s ease;
-    opacity: 0.9;
-}
-
-.card:hover .card-overlay {
-    opacity: 1;
-}
-
-.card-title {
-    color: white;
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin: 0;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-}
-
-/* Admin Controls */
-.btn-round {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.9);
-    border: none;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(4px);
-}
-
-.btn-round:hover {
-    transform: scale(1.1);
-    background: white;
-}
-
-.btn-round img {
-    width: 20px;
-    height: 20px;
-    object-fit: contain;
-}
-
-/* Enrollment Status */
-.enrollment-status {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-size: 0.875rem;
-    font-weight: 500;
-    background: rgba(25, 135, 84, 0.9);
-    color: white;
-    backdrop-filter: blur(4px);
-    z-index: 1;
-}
-
-/* Overlay Actions */
-.overlay-actions {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1rem;
-}
-
-.overlay-btn {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: 2px solid white;
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(4px);
-}
-
-.overlay-btn:hover {
-    background: white;
-    color: var(--primary-color);
-    transform: scale(1.1);
-}
-
-.overlay-btn i {
-    font-size: 1.25rem;
-}
-
-/* Grid Layout */
-.col-md-4 {
-    padding: 1rem;
-}
-
-@media (max-width: 768px) {
-    .card-image {
-        height: 250px;
-    }
-    
-    .card-title {
-        font-size: 1.1rem;
-    }
-}
-
-/* Course Actions */
-.course-actions {
-    display: flex;
-    gap: 1rem;
-}
-
-.course-action-btn {
-    flex: 1;
-    padding: 0.75rem 1.25rem;
-    border-radius: 12px;
-    font-weight: 500;
-    font-size: 0.95rem;
-    transition: all 0.3s ease;
-    text-align: center;
-    border: none;
-}
-
-.course-action-btn.primary {
-    background: var(--secondary-color);
-    color: white;
-}
-
-.course-action-btn.primary:hover {
-    background: var(--primary-color);
-    transform: translateY(-2px);
-}
-
-.course-action-btn.secondary {
-    background: var(--light-bg);
-    color: var(--primary-color);
-}
-
-.course-action-btn.secondary:hover {
-    background: #e9ecef;
-    transform: translateY(-2px);
-}
-
-/* Course Stats */
-.course-stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-    padding: 1rem 0;
-    margin-top: 1rem;
-    border-top: 1px solid rgba(0,0,0,0.05);
-}
-
-.course-stat-item {
-    text-align: center;
-    padding: 0.5rem;
-    border-radius: 12px;
-    background: var(--light-bg);
-    transition: all 0.3s ease;
-}
-
-.course-stat-item:hover {
-    background: #e9ecef;
-    transform: translateY(-2px);
-}
-
-.course-stat-value {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--primary-color);
-    margin-bottom: 0.25rem;
-}
-
-.course-stat-label {
-    font-size: 0.8rem;
-    color: #6c757d;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-/* Progress Bar */
-.course-progress {
-    height: 6px;
-    background-color: #e9ecef;
-    border-radius: 10px;
-    margin: 1rem 0;
-    overflow: hidden;
-}
-
-.course-progress-bar {
-    height: 100%;
-    background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
-    border-radius: 10px;
-    transition: width 0.6s ease;
-}
-
-/* Card Hover Effects */
-.card {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.card:hover {
-    transform: translateY(-5px) scale(1.01);
-}
-
-.card:active {
-    transform: translateY(0) scale(0.98);
-}
-
-/* Section Title */
-.section-title {
-    color: var(--primary-color);
-    font-weight: 600;
-    margin-bottom: 2rem;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-size: 1.5rem;
-    position: relative;
-    padding-bottom: 0.5rem;
-}
-
-.section-title::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 50px;
-    height: 3px;
-    background: var(--secondary-color);
-    border-radius: 2px;
-}
-
-.section-title i {
-    color: var(--secondary-color);
-    font-size: 1.75rem;
-}
-
-/* Footer */
-.footer {
-    background: var(--dark-bg);
-    color: white;
-    padding: 2rem 0;
-    margin-top: 3rem;
-}
-
-/* Floating Add Button */
-.floating-add-btn {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    min-width: 160px;
-    height: 56px;
-    border-radius: 28px;
-    background: var(--secondary-color);
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    font-size: 16px;
-    font-weight: 500;
-    box-shadow: 0 4px 20px rgba(52, 152, 219, 0.3);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    z-index: 1000;
-    border: none;
-    padding: 0 24px;
-}
-
-.floating-add-btn i {
-    font-size: 18px;
-}
-
-.floating-add-btn:hover {
-    transform: scale(1.05);
-    background: var(--primary-color);
-    box-shadow: 0 6px 25px rgba(52, 152, 219, 0.4);
-}
-
-.floating-add-btn:active {
-    transform: scale(0.95);
-}
-
-/* Modal Styles */
-.modal-backdrop {
-    background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(4px);
-}
-
-.modal-content {
-    border: none;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    animation: modalFadeIn 0.3s ease;
-}
-
-.modal-header {
-    background: var(--primary-color);
-    color: white;
-    border-radius: 12px 12px 0 0;
-    padding: 1.5rem;
-    border: none;
-}
-
-.modal-body {
-    padding: 2rem;
-}
-
-.modal-footer {
-    padding: 1.5rem;
-    border-top: 1px solid rgba(0,0,0,0.05);
-    gap: 1rem;
-}
-
-/* Form Styles */
-.form-group {
-    margin-bottom: 1.5rem;
-}
-
-.form-label {
-    font-weight: 500;
-    color: var(--primary-color);
-    margin-bottom: 0.75rem;
-}
-
-.form-control {
-    border: 1px solid rgba(0,0,0,0.1);
-    border-radius: 8px;
-    padding: 1rem;
-    transition: all 0.3s ease;
-    font-size: 1rem;
-}
-
-.form-control:focus {
-    border-color: var(--secondary-color);
-    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
-    outline: none;
-}
-
-.form-control::placeholder {
-    color: #adb5bd;
-}
-
-/* Button Styles */
-.btn-secondary {
-    background: var(--light-bg);
-    color: var(--primary-color);
-    border: none;
-    padding: 0.75rem 1.5rem;
-    border-radius: 8px;
-    font-weight: 500;
-    transition: all 0.3s ease;
-}
-
-.btn-secondary:hover {
-    background: #e9ecef;
-    transform: translateY(-2px);
-}
-
-.btn-submit {
-    background: var(--primary-color);
-    color: white;
-    padding: 0.75rem 1.5rem;
-    border-radius: 8px;
-    border: none;
-    font-weight: 500;
-    transition: all 0.3s ease;
-}
-
-.btn-submit:hover {
-    background: var(--secondary-color);
-    transform: translateY(-2px);
-}
-
-/* Blog Post Modal Styles */
-.modal-lg {
-    max-width: 800px;
-}
-
-.cover-image-preview {
-    width: 100%;
-    height: 200px;
-    border: 2px dashed #dee2e6;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    background: #f8f9fa;
-    overflow: hidden;
-}
-
-.cover-image-preview:hover {
-    border-color: var(--secondary-color);
-    background: #f1f3f5;
-}
-
-.upload-placeholder {
-    text-align: center;
-    color: #adb5bd;
-}
-
-.upload-placeholder i {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
-}
-
-.preview-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 10px;
-}
-
-/* Form Control Variations */
-.form-control-lg {
-    font-size: 1.5rem;
-    padding: 1rem;
-    font-weight: 600;
-}
-
-.content-editor {
-    font-family: 'Georgia', serif;
-    font-size: 1.1rem;
-    line-height: 1.6;
-    padding: 1rem;
-}
-
-.content-editor:focus {
-    box-shadow: none;
-    border-color: #dee2e6;
-}
-
-/* Success Animation */
-.success-animation {
-    animation: successPop 0.5s ease-out;
-}
-
-@keyframes successPop {
-    0% {
-        transform: scale(0.5);
-        opacity: 0;
-    }
-    70% {
-        transform: scale(1.2);
-    }
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
-@keyframes modalFadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Modal States */
-.modal-open {
-    overflow: hidden;
-}
-
-.modal.fade .modal-dialog {
-    transition: transform 0.3s ease-out;
-}
-
-.modal.fade.show .modal-dialog {
-    transform: none;
-}
-
-/* Drag and Drop Styles */
-.cover-image-preview.highlight {
-    border-color: var(--secondary-color);
-    background-color: rgba(52, 152, 219, 0.1);
-    border-style: solid;
-}
-
-/* Toast Styles */
-.toast.bg-danger {
-    background-color: var(--accent-color) !important;
-}
-
 /* Card Actions */
-.card-actions {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    z-index: 10;
-}
-
-.action-btn {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.9);
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(4px);
-}
-
-.action-btn i {
-    color: var(--primary-color);
-    font-size: 1.25rem;
-    transition: all 0.3s ease;
-}
-
-.action-btn:hover {
-    background: white;
-    transform: scale(1.1);
-}
-
-.action-btn:hover i {
-    color: var(--secondary-color);
-}
-
-.action-menu {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    margin-top: 0.5rem;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-    min-width: 200px;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.3s ease;
-}
-
-.action-menu.show {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-.menu-item {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.75rem 1rem;
-    width: 100%;
-    border: none;
-    background: none;
-    color: var(--primary-color);
-    font-size: 0.95rem;
-    text-align: left;
-    transition: all 0.2s ease;
-}
-
-.menu-item:first-child {
-    border-radius: 12px 12px 0 0;
-}
-
-.menu-item:last-child {
-    border-radius: 0 0 12px 12px;
-}
-
-.menu-item i {
-    font-size: 1.1rem;
-    width: 20px;
-    text-align: center;
-}
-
-.menu-item:hover {
-    background: var(--light-bg);
-    color: var(--secondary-color);
-}
-
-.menu-item.delete-course-btn {
-    color: var(--accent-color);
-}
-
-.menu-item.delete-course-btn:hover {
-    background: #fee2e2;
-}
-
-/* Edit Course Modal */
-#editCourseModal .modal-content {
-    border-radius: 20px;
-}
-
-#editCourseModal .modal-header {
-    background: var(--primary-color);
-    color: white;
-    border-radius: 20px 20px 0 0;
-    padding: 1.5rem;
-}
-
-#editCourseModal .modal-body {
-    padding: 2rem;
-}
-
-#editCourseModal .form-control {
-    border-radius: 12px;
-    padding: 1rem;
-    border: 1px solid rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
-}
-
-#editCourseModal .form-control:focus {
-    border-color: var(--secondary-color);
-    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
-}
-
-#editCourseModal .btn-primary {
-    background: var(--secondary-color);
-    border: none;
-    padding: 0.75rem 1.5rem;
-    border-radius: 12px;
-    font-weight: 500;
-    transition: all 0.3s ease;
-}
-
-#editCourseModal .btn-primary:hover {
-    background: var(--primary-color);
-    transform: translateY(-2px);
-}
-
-/* Card Action Buttons */
 .edit-btn,
 .delete-btn {
     position: absolute;
@@ -766,7 +275,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.9);
+    background: var(--nku-white);
     backdrop-filter: blur(4px);
     transition: all 0.3s ease;
     cursor: pointer;
@@ -783,185 +292,352 @@ body {
     right: 1rem;
 }
 
-.edit-btn i,
-.delete-btn i {
-    font-size: 1rem;
-    transition: all 0.3s ease;
-}
-
 .edit-btn i {
-    color: var(--secondary-color);
+    color: var(--nku-black);
 }
 
 .delete-btn i {
-    color: var(--accent-color);
+    color: #dc3545;
 }
 
 .edit-btn:hover,
 .delete-btn:hover {
     transform: scale(1.1);
-    background: white;
+    background: var(--nku-yellow);
 }
 
 .edit-btn:hover i {
-    color: var(--primary-color);
+    color: var(--nku-black);
 }
 
 .delete-btn:hover i {
-    color: #dc3545;
+    color: var(--nku-black);
 }
 
-/* Edit Modal Styles */
-#editCourseModal .modal-content {
+/* Card Content */
+.card-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 2rem 1.5rem 1.5rem;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.2), transparent);
+    transition: all 0.3s ease;
+}
+
+.card-title {
+    color: var(--nku-white);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.card-description {
+    color: rgba(255, 255, 255, 0.9);
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+/* Enrollment Status */
+.enrollment-status {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    background: var(--nku-yellow);
+    color: var(--nku-black);
+    z-index: 1;
+}
+
+/* Floating Add Button */
+.floating-add-btn {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    min-width: 160px;
+    height: 48px;
+    border-radius: 24px;
+    background: var(--nku-yellow);
+    color: var(--nku-black);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.floating-add-btn i {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.floating-add-btn:hover {
+    transform: translateY(-5px);
+    background: var(--nku-black);
+    color: var(--nku-yellow);
+    box-shadow: 0 6px 25px rgba(255, 210, 4, 0.3);
+}
+
+.floating-add-btn:hover i {
+    transform: rotate(90deg);
+}
+
+.floating-add-btn:active {
+    transform: translateY(-2px);
+}
+
+/* Modal Styles */
+.modal-content {
     border: none;
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
 }
 
-#editCourseModal .modal-header {
-    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
-    padding: 1.5rem;
+.modal-header {
+    background: var(--nku-black);
+    color: var(--nku-white);
     border: none;
+    padding: 1.5rem;
 }
 
-#editCourseModal .modal-title {
-    color: white;
-    font-size: 1.25rem;
-    font-weight: 600;
+.modal-title {
     display: flex;
     align-items: center;
     gap: 0.75rem;
+    font-weight: 600;
 }
 
-#editCourseModal .modal-title i {
-    font-size: 1.5rem;
+.modal-title i {
+    color: var(--nku-yellow);
 }
 
-#editCourseModal .btn-close {
-    background-color: rgba(255,255,255,0.8);
-    border-radius: 50%;
-    padding: 0.75rem;
+.btn-close {
+    background-color: var(--nku-yellow);
+    opacity: 0.8;
     transition: all 0.3s ease;
 }
 
-#editCourseModal .btn-close:hover {
-    background-color: white;
+.btn-close:hover {
+    opacity: 1;
     transform: scale(1.1);
 }
 
-#editCourseModal .modal-body {
+.modal-body {
     padding: 2rem;
 }
 
-#editCourseModal .form-label {
-    color: var(--primary-color);
+.form-label {
+    color: var(--nku-black);
     font-weight: 500;
-    margin-bottom: 0.75rem;
 }
 
-#editCourseModal .form-control {
+.form-control {
     border: 1px solid rgba(0,0,0,0.1);
     border-radius: 12px;
-    padding: 1rem;
-    font-size: 1rem;
+    padding: 0.75rem 1rem;
     transition: all 0.3s ease;
 }
 
-#editCourseModal .form-control:focus {
-    border-color: var(--secondary-color);
-    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+.form-control:focus {
+    border-color: var(--nku-yellow);
+    box-shadow: 0 0 0 3px rgba(255, 210, 4, 0.1);
 }
 
-#editCourseModal .modal-footer {
+.modal-footer {
+    border-top: 1px solid rgba(0,0,0,0.1);
     padding: 1.5rem;
-    border-top: 1px solid rgba(0,0,0,0.05);
-    gap: 1rem;
 }
 
-#editCourseModal .btn {
+.btn-primary {
+    background: var(--nku-yellow);
+    color: var(--nku-black);
+    border: none;
+    font-weight: 500;
     padding: 0.75rem 1.5rem;
     border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background: var(--nku-black);
+    color: var(--nku-yellow);
+    transform: translateY(-2px);
+}
+
+.btn-outline-secondary {
+    border: 1px solid rgba(0,0,0,0.1);
+    color: var(--nku-black);
     font-weight: 500;
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-secondary:hover {
+    background: var(--nku-gray);
+    transform: translateY(-2px);
+}
+
+/* Toast Notifications */
+.toast {
+    background: var(--nku-black);
+    color: var(--nku-white);
+    border-radius: 12px;
+    border: 2px solid var(--nku-yellow);
+}
+
+.toast-body {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    transition: all 0.3s ease;
 }
 
-#editCourseModal .btn-primary {
-    background: var(--secondary-color);
+.toast-body i {
+    color: var(--nku-yellow);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .welcome-section {
+        padding: 2rem 1.5rem;
+    }
+
+    .welcome-section h1 {
+        font-size: 2rem;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    .card-image {
+        height: 180px;
+    }
+}
+
+@media (max-width: 480px) {
+    .welcome-section h1 {
+        font-size: 1.75rem;
+    }
+
+    .welcome-section p {
+        font-size: 1rem;
+    }
+
+    .floating-add-btn {
+        min-width: auto;
+        width: auto;
+        height: 44px;
+        padding: 0 20px;
+        font-size: 0.9rem;
+        bottom: 1.5rem;
+        right: 1.5rem;
+    }
+}
+
+/* Delete Confirmation Modal */
+.delete-modal .modal-content {
     border: none;
-}
-
-#editCourseModal .btn-primary:hover {
-    background: var(--primary-color);
-    transform: translateY(-2px);
-}
-
-#editCourseModal .btn-outline-secondary {
-    border: 1px solid rgba(0,0,0,0.1);
-    color: var(--primary-color);
-}
-
-#editCourseModal .btn-outline-secondary:hover {
-    background: var(--light-bg);
-    transform: translateY(-2px);
-}
-
-/* Card Description */
-.card-description {
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 0.9rem;
-    margin-top: 0.5rem;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
+    border-radius: 20px;
     overflow: hidden;
-    text-overflow: ellipsis;
 }
 
-/* Image Preview */
-.cover-image-preview {
-    position: relative;
-    width: 100%;
-    height: 200px;
-    border-radius: 12px;
-    overflow: hidden;
-    background: var(--light-bg);
-    margin-bottom: 1.5rem;
+.delete-modal .modal-header {
+    background: var(--nku-black);
+    color: var(--nku-white);
+    border: none;
+    padding: 1.5rem;
 }
 
-.cover-image-preview img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.delete-modal .modal-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-weight: 600;
 }
 
-.upload-placeholder {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.delete-modal .modal-title i {
+    color: #dc3545;
+    font-size: 1.25rem;
+}
+
+.delete-modal .modal-body {
+    padding: 2rem;
     text-align: center;
-    color: #6c757d;
 }
 
-.upload-placeholder i {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
+.delete-modal .modal-body i {
+    font-size: 3rem;
+    color: #dc3545;
+    margin-bottom: 1rem;
 }
 
-/* Toast Animations */
-.toast {
-    animation: slideIn 0.3s ease-out;
+.delete-modal .modal-body p {
+    font-size: 1.1rem;
+    color: var(--nku-black);
+    margin-bottom: 0;
 }
 
-@keyframes slideIn {
-    from {
-        transform: translateX(100%);
-    }
-    to {
-        transform: translateX(0);
-    }
+.delete-modal .modal-footer {
+    border-top: 1px solid rgba(0,0,0,0.1);
+    padding: 1.5rem;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.btn-delete {
+    background: #dc3545;
+    color: var(--nku-white);
+    border: none;
+    font-weight: 500;
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    min-width: 120px;
+}
+
+.btn-delete:hover {
+    background: #bb2d3b;
+    color: var(--nku-white);
+    transform: translateY(-2px);
+}
+
+.btn-cancel {
+    background: var(--nku-gray);
+    color: var(--nku-black);
+    border: none;
+    font-weight: 500;
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    min-width: 120px;
+}
+
+.btn-cancel:hover {
+    background: #e2e6ea;
+    transform: translateY(-2px);
+}
+
+/* Delete Button Animation */
+@keyframes deleteShake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+.delete-btn:hover {
+    animation: deleteShake 0.4s ease-in-out;
 } 

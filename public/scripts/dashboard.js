@@ -124,7 +124,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                                 <button class="edit-btn" data-course-id="${course.id}" data-bs-toggle="modal" data-bs-target="#editCourseModal">
                                     <i class="fas fa-pencil-alt"></i>
                                 </button>
-                                <button class="delete-btn" data-course-id="${course.id}">
+                                <button class="delete-btn" data-course-id="${course.id}" data-bs-toggle="modal" data-bs-target="#deleteConfirmModal">
                                     <i class="fas fa-trash"></i>
                                 </button>` : 
                                 (isEnrolled ? `
@@ -232,27 +232,55 @@ document.addEventListener("DOMContentLoaded", async () => {
         const deleteBtn = e.target.closest('.delete-btn');
         if (!deleteBtn) return;
         
-        if (confirm('Are you sure you want to delete this course?')) {
-            const courseId = parseInt(deleteBtn.dataset.courseId);
+        const courseId = parseInt(deleteBtn.dataset.courseId);
+        if (courseId) {
+            courseToDelete = courseId;
+            const deleteModal = new bootstrap.Modal(document.getElementById('deleteConfirmModal'));
+            deleteModal.show();
+        }
+    });
+
+    // Event listener for confirm delete button
+    document.getElementById('confirmDelete')?.addEventListener('click', async function() {
+        if (courseToDelete) {
             const data = await getData();
             
-            data.courses = data.courses.filter(c => c.id !== courseId);
+            // Filter out the deleted course
+            data.courses = data.courses.filter(c => c.id !== courseToDelete);
+            // Remove course from all users' enrolled courses
             data.users.forEach(u => {
-                u.enrolledCourses = u.enrolledCourses.filter(e => e.courseId !== courseId);
+                if (u.enrolledCourses) {
+                    u.enrolledCourses = u.enrolledCourses.filter(e => e.courseId !== courseToDelete);
+                }
             });
             
             try {
                 await saveData(data);
-                await renderCourses();
+                
+                // Hide the modal
+                const deleteModal = bootstrap.Modal.getInstance(document.getElementById('deleteConfirmModal'));
+                deleteModal.hide();
                 
                 // Show success toast
                 const toast = new bootstrap.Toast(document.getElementById('courseAddedToast'));
                 document.querySelector('.toast-body').innerHTML = 
                     '<i class="fas fa-check-circle me-2"></i>Course deleted successfully!';
                 toast.show();
+                
+                // Refresh the courses display
+                await renderCourses();
+                
+                // Reset courseToDelete
+                courseToDelete = null;
             } catch (error) {
                 console.error('Failed to delete course:', error);
-                alert('Failed to delete course. Please try again.');
+                // Show error toast
+                const toast = new bootstrap.Toast(document.getElementById('courseAddedToast'));
+                document.querySelector('.toast-body').innerHTML = 
+                    '<i class="fas fa-exclamation-circle me-2"></i>Failed to delete course. Please try again.';
+                document.querySelector('.toast').classList.remove('bg-success');
+                document.querySelector('.toast').classList.add('bg-danger');
+                toast.show();
             }
         }
     });
@@ -337,40 +365,122 @@ function loadDashboardContent() {
 
 // Function to create course card
 function createCourseCard(course) {
-    const col = document.createElement('div');
-    col.className = 'col-md-4';
-    
-    col.innerHTML = `
-        <div class="course-card">
-            <img src="${course.imageUrl}" class="card-image" alt="${course.title}">
-            <div class="card-body">
-                <h3 class="card-title">${course.title}</h3>
-                <p class="card-text">${course.description}</p>
-                <div class="course-stats">
-                    <div class="course-stat-item">
-                        <div class="course-stat-value">${course.stats.lessons}</div>
-                        <div class="course-stat-label">Lessons</div>
-                    </div>
-                    <div class="course-stat-item">
-                        <div class="course-stat-value">${course.stats.duration}</div>
-                        <div class="course-stat-label">Duration</div>
-                    </div>
-                    <div class="course-stat-item">
-                        <div class="course-stat-value">${course.stats.students}</div>
-                        <div class="course-stat-label">Students</div>
+    return `
+        <div class="col-md-4 mb-4">
+            <div class="card course-card" data-course-id="${course.id}">
+                <div class="card-img-container">
+                    <img src="${course.image || 'assets/images/default-course.jpg'}" class="card-img-top" alt="${course.title}">
+                    <div class="card-actions">
+                        <button class="edit-btn" data-bs-toggle="modal" data-bs-target="#editCourseModal">
+                            <i class="fas fa-pencil-alt"></i>
+                        </button>
+                        <button class="delete-btn" data-bs-toggle="modal" data-bs-target="#deleteConfirmModal">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
                     </div>
                 </div>
-            </div>
-            <div class="card-footer">
-                <div class="course-actions">
-                    <button class="course-action-btn primary">Start Course</button>
-                    <button class="course-action-btn secondary">Preview</button>
+                <div class="card-body">
+                    <h5 class="card-title">${course.title}</h5>
+                    <p class="card-text">${course.description}</p>
                 </div>
             </div>
         </div>
     `;
+}
 
-    return col;
+// Add this HTML to your dashboard.html
+const deleteModalHTML = `
+    <div class="modal fade delete-modal" id="deleteConfirmModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Delete Course
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <i class="fas fa-trash-alt"></i>
+                    <p>Are you sure you want to delete this course?<br>This action cannot be undone.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-delete" id="confirmDelete">Delete Course</button>
+                </div>
+            </div>
+        </div>
+    </div>
+`;
+
+// Add the delete modal to the document body when the page loads
+document.body.insertAdjacentHTML('beforeend', deleteModalHTML);
+
+// Initialize delete confirmation modal
+let courseToDelete = null;
+const deleteModal = new bootstrap.Modal(document.getElementById('deleteConfirmModal'));
+
+// Event listener for delete button click
+document.addEventListener('click', function(e) {
+    if (e.target.closest('.delete-btn')) {
+        const card = e.target.closest('.course-card');
+        courseToDelete = card.dataset.courseId;
+    }
+});
+
+// Event listener for confirm delete button
+document.getElementById('confirmDelete').addEventListener('click', function() {
+    if (courseToDelete) {
+        // Delete the course
+        deleteCourse(courseToDelete);
+        // Hide the modal
+        deleteModal.hide();
+        // Show success toast
+        showToast('Course deleted successfully', 'success');
+        // Reset courseToDelete
+        courseToDelete = null;
+    }
+});
+
+// Function to show toast notifications
+function showToast(message, type = 'success') {
+    const toastHTML = `
+        <div class="toast-container position-fixed bottom-0 end-0 p-3">
+            <div class="toast align-items-center text-white bg-${type === 'success' ? 'success' : 'danger'} border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        ${message}
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    document.body.insertAdjacentHTML('beforeend', toastHTML);
+    const toastElement = document.querySelector('.toast');
+    const toast = new bootstrap.Toast(toastElement);
+    toast.show();
+    
+    // Remove toast after it's hidden
+    toastElement.addEventListener('hidden.bs.toast', function() {
+        toastElement.parentElement.remove();
+    });
+}
+
+// Function to delete course
+async function deleteCourse(courseId) {
+    try {
+        // Here you would typically make an API call to delete the course
+        // For now, we'll just remove it from the DOM
+        const card = document.querySelector(`.course-card[data-course-id="${courseId}"]`);
+        if (card) {
+            card.closest('.col-md-4').remove();
+        }
+    } catch (error) {
+        console.error('Error deleting course:', error);
+        showToast('Error deleting course', 'error');
+    }
 }
 
 // Add file input for image upload

@@ -18,16 +18,16 @@
     <link rel="stylesheet" type="text/css" href="../assets/css/style.min.css" />
     <style>
         :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #3498db;
-            --accent-color: #e74c3c;
-            --light-bg: #f8f9fa;
-            --dark-bg: #2c3e50;
+            --nku-black: #000000;
+            --nku-yellow: #ffd204;
+            --nku-gold: #c6a052;
+            --nku-white: #ffffff;
+            --nku-gray: #f4f4f4;
         }
 
         body {
-            background: #ffffff;
-            color: #000000;
+            background: var(--nku-white);
+            color: var(--nku-black);
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             min-height: 100vh;
             display: flex;
@@ -36,8 +36,8 @@
         }
 
         .navbar {
-            background: white !important;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            background: var(--nku-black) !important;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
             padding: 1rem 0;
         }
 
@@ -48,7 +48,7 @@
         }
 
         .nav-link {
-            color: var(--primary-color) !important;
+            color: var(--nku-white) !important;
             font-weight: 500;
             padding: 0.5rem 1rem !important;
             transition: all 0.3s ease;
@@ -59,6 +59,7 @@
         }
 
         .nav-link i {
+            color: var(--nku-yellow);
             font-size: 1.1rem;
             display: inline-flex;
             align-items: center;
@@ -67,27 +68,40 @@
         }
 
         .nav-link:hover {
-            color: var(--secondary-color) !important;
+            color: var(--nku-yellow) !important;
+            transform: translateY(-2px);
         }
 
         .dropdown-menu {
-            border: none;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            border-radius: 8px;
-            padding: 0.5rem;
-            margin-top: 0.5rem;
+            background: var(--nku-black);
+            border: 2px solid var(--nku-yellow);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            border-radius: 12px;
+            padding: 0.75rem;
+            margin-top: 0.75rem;
         }
 
         .dropdown-item {
             padding: 0.7rem 1.2rem;
-            color: var(--primary-color);
-            border-radius: 6px;
+            color: var(--nku-white);
+            border-radius: 8px;
             transition: all 0.3s ease;
         }
 
         .dropdown-item:hover {
-            background-color: var(--light-bg);
-            color: var(--secondary-color);
+            background-color: var(--nku-yellow);
+            color: var(--nku-black);
+        }
+
+        .dropdown-item i {
+            color: var(--nku-yellow);
+            margin-right: 0.5rem;
+            width: 1.5rem;
+            text-align: center;
+        }
+
+        .dropdown-item:hover i {
+            color: var(--nku-black);
         }
 
         .landing-container {
@@ -96,88 +110,138 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 2rem;
+            padding: 4rem 2rem;
             margin-top: 4rem;
+            background: linear-gradient(135deg, var(--nku-black) 0%, #1a1a1a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .landing-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--nku-yellow);
         }
 
         .greeting {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 4rem;
+            position: relative;
+            z-index: 1;
         }
 
         .greeting h1 {
-            font-size: 2.5rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--nku-white);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
         .greeting p {
-            font-size: 1.25rem;
-            color: #4a5568;
+            font-size: 1.5rem;
+            color: var(--nku-yellow);
             max-width: 600px;
+            font-weight: 500;
         }
 
         .cards-container {
             display: flex;
-            gap: 2rem;
+            gap: 3rem;
             justify-content: center;
             align-items: stretch;
             flex-wrap: wrap;
             max-width: 1200px;
             width: 100%;
             padding: 0 1rem;
+            position: relative;
+            z-index: 1;
         }
 
         .card {
             flex: 1;
-            min-width: 280px;
+            min-width: 300px;
             max-width: 400px;
-            background: white;
-            border: 1px solid #e2e8f0;
-            border-radius: 1rem;
-            padding: 2rem;
+            background: var(--nku-white);
+            border: none;
+            border-radius: 20px;
+            padding: 2.5rem;
             text-align: center;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             text-decoration: none;
             color: inherit;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--nku-yellow);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
         }
 
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.3);
+        }
+
+        .card:hover::after {
+            transform: scaleX(1);
         }
 
         .card-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            color: var(--secondary-color);
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            color: var(--nku-black);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover .card-icon {
+            color: var(--nku-yellow);
+            transform: scale(1.1);
         }
 
         .card h2 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            font-weight: 600;
+            font-size: 1.75rem;
+            margin-bottom: 1.25rem;
+            font-weight: 700;
+            color: var(--nku-black);
         }
 
         .card p {
-            color: #4a5568;
-            line-height: 1.5;
-            margin-bottom: 1.5rem;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
         }
 
         .card-button {
             display: inline-block;
-            padding: 0.75rem 1.5rem;
-            background: var(--secondary-color);
-            color: white;
-            border-radius: 0.5rem;
-            font-weight: 500;
-            transition: background 0.3s ease;
+            padding: 1rem 2rem;
+            background: var(--nku-black);
+            color: var(--nku-yellow);
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: 2px solid var(--nku-black);
         }
 
-        .card-button:hover {
-            background: #2980b9;
+        .card:hover .card-button {
+            background: var(--nku-yellow);
+            color: var(--nku-black);
+            border-color: var(--nku-yellow);
         }
 
         .navbar-toggler {
@@ -192,34 +256,56 @@
 
         .navbar-toggler i {
             font-size: 1.5rem;
-            color: var(--primary-color);
+            color: var(--nku-yellow);
         }
 
         @media (max-width: 991.98px) {
             .navbar-collapse {
-                background: white;
+                background: var(--nku-black);
                 padding: 1rem;
-                border-radius: 8px;
-                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-                margin-top: 0.5rem;
+                border-radius: 12px;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+                margin-top: 1rem;
+                border: 2px solid var(--nku-yellow);
             }
 
             .nav-link {
-                padding: 0.75rem 1rem !important;
+                padding: 1rem !important;
             }
 
             .dropdown-menu {
+                background: transparent;
                 border: none;
                 box-shadow: none;
                 padding-left: 1rem;
-            }
-
-            .dropdown-item {
-                padding: 0.75rem 1rem;
+                border-left: 2px solid var(--nku-yellow);
+                margin-left: 1rem;
             }
         }
 
-        @media (max-width: 640px) {
+        @media (max-width: 768px) {
+            .greeting h1 {
+                font-size: 2.5rem;
+            }
+
+            .greeting p {
+                font-size: 1.25rem;
+            }
+
+            .landing-container {
+                padding: 3rem 1.5rem;
+            }
+
+            .cards-container {
+                gap: 2rem;
+            }
+
+            .card {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
             .greeting h1 {
                 font-size: 2rem;
             }
@@ -230,23 +316,23 @@
 
             .cards-container {
                 flex-direction: column;
-                align-items: center;
             }
 
             .card {
                 width: 100%;
+                min-width: auto;
             }
         }
     </style>
 </head>
 <body>
     <!-- START NAVBAR -->
-    <nav class="navbar navbar-expand-lg fixed-top navbar-custom sticky sticky-light" id="navbar">
+    <nav class="navbar navbar-expand-lg fixed-top navbar-custom sticky sticky-dark" id="navbar">
         <div class="container">
             <!-- LOGO -->
             <a class="navbar-brand logo text-uppercase" href="landing.html">
-                <img src="../assets/images/full-logo-black.png" class="logo-light" alt="Logo" height="40">
-                <img src="../assets/images/norse.png" class="logo-light ms-2" alt="Norse" height="25">
+                <img src="../assets/images/full-logo-white.png" class="logo-light" alt="Logo" height="40">
+                <img src="../assets/images/norse-white.png" class="logo-light ms-2" alt="Norse" height="25">
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
@@ -293,7 +379,7 @@
     <main class="landing-container">
         <div class="greeting">
             <h1>Welcome to Norse Interview</h1>
-            <p>Choose your path to success</p>
+            <p>Prepare for Success, the Norse Way</p>
         </div>
 
         <div class="cards-container">
@@ -301,9 +387,9 @@
                 <div class="card-icon">
                     <i class="fas fa-comments"></i>
                 </div>
-                <h2>Interview</h2>
-                <p>Practice and master your interview skills with our comprehensive interview preparation platform.</p>
-                <span class="card-button">Start Interview</span>
+                <h2>Interview Practice</h2>
+                <p>Master your interview skills with our comprehensive preparation platform. Get ready to showcase your potential.</p>
+                <span class="card-button">Start Practicing</span>
             </a>
 
             <a href="dashboard.html" class="card">
@@ -311,8 +397,8 @@
                     <i class="fas fa-graduation-cap"></i>
                 </div>
                 <h2>Course Library</h2>
-                <p>Access our extensive library of courses to enhance your knowledge and skills.</p>
-                <span class="card-button">Browse Courses</span>
+                <p>Access our curated collection of courses designed to enhance your knowledge and professional skills.</p>
+                <span class="card-button">Explore Courses</span>
             </a>
         </div>
     </main>
