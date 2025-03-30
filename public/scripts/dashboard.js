@@ -117,63 +117,23 @@ document.addEventListener("DOMContentLoaded", async () => {
     
             const card = `
                 <div class="col-md-4 mb-4">
-                    <div class="card h-100">
+                    <div class="card h-100" data-course-id="${course.id}">
                         <div class="card-image">
                             <img src="../${course.image}" alt="${course.title}">
                             ${isAdminUser ? `
-                                <button class="edit-course btn-round position-absolute top-0 start-0 m-3" data-id="${course.id}">
-                                    <img src="../assets/icons/black-pencil.png" alt="Edit">
+                                <button class="edit-btn" data-course-id="${course.id}" data-bs-toggle="modal" data-bs-target="#editCourseModal">
+                                    <i class="fas fa-pencil-alt"></i>
                                 </button>
-                                <button class="delete-course btn-round position-absolute top-0 end-0 m-3" data-id="${course.id}">
-                                    <img src="../assets/icons/trash.png" alt="Delete">
+                                <button class="delete-btn" data-course-id="${course.id}">
+                                    <i class="fas fa-trash"></i>
                                 </button>` : 
                                 (isEnrolled ? `
                                     <div class="enrollment-status enrolled">
                                         <i class="fas fa-check-circle me-1"></i>${completion}% Complete
-                                    </div>
-                                    <div class="course-progress mt-3">
-                                        <div class="course-progress-bar" style="width: ${completion}%"></div>
                                     </div>` : '')}
-                        </div>
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title">${course.title}</h5>
-                            <p class="card-text flex-grow-1">${course.description}</p>
-                            <div class="course-stats">
-                                <div class="course-stat-item">
-                                    <div class="course-stat-value">${course.stats.lessons}</div>
-                                    <div class="course-stat-label">Lessons</div>
-                                </div>
-                                <div class="course-stat-item">
-                                    <div class="course-stat-value">${course.stats.duration}</div>
-                                    <div class="course-stat-label">Duration</div>
-                                </div>
-                                <div class="course-stat-item">
-                                    <div class="course-stat-value">${course.stats.students}</div>
-                                    <div class="course-stat-label">Students</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <div class="course-actions">
-                                ${isAdminUser ? `
-                                    <button class="course-action-btn secondary" onclick="previewCourse(${course.id})">
-                                        <i class="fas fa-eye me-2"></i>Preview
-                                    </button>
-                                    <button class="course-action-btn primary" onclick="editCourse(${course.id})">
-                                        <i class="fas fa-edit me-2"></i>Edit
-                                    </button>
-                                ` : (isEnrolled ? `
-                                    <button class="course-action-btn primary continue-course" data-id="${course.id}">
-                                        <i class="fas fa-play me-2"></i>Continue Learning
-                                    </button>
-                                ` : `
-                                    <button class="course-action-btn secondary" onclick="previewCourse(${course.id})">
-                                        <i class="fas fa-eye me-2"></i>Preview
-                                    </button>
-                                    <button class="course-action-btn primary add-course" data-id="${course.id}">
-                                        <i class="fas fa-plus me-2"></i>Enroll Now
-                                    </button>
-                                `)}
+                            <div class="card-overlay">
+                                <h5 class="card-title">${course.title}</h5>
+                                <p class="card-description">${course.description}</p>
                             </div>
                         </div>
                     </div>
@@ -185,40 +145,115 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
     }
     
-    // Handle actions
-    document.addEventListener('click', async (e) => {
-        const target = e.target.closest('[data-id]');
-        if (!target) return;
-        
-        const courseId = Number(target.dataset.id);
-        const action = target.classList.contains('add-course') ? 'add' :
-                       target.classList.contains('delete-course') ? 'delete' : null;
+    // Handle edit functionality
+    document.addEventListener('click', async function(e) {
+        const editBtn = e.target.closest('.edit-btn');
+        if (!editBtn) return;
 
+        const courseId = editBtn.dataset.courseId;
         const data = await getData();
-        const user = data.users.find(u => u.username === currentUser);
+        const course = data.courses.find(c => c.id === parseInt(courseId));
         
-        try {
-            switch(action) {
-                case 'add':
-                    if (!user.enrolledCourses.some(e => e.courseId === courseId)) {
-                        user.enrolledCourses.push({ courseId, completion: 0 });
-                    }
-                    break;
-                    
-                case 'delete':
-                    if (!confirm('Permanently delete this course?')) return;
-                    data.courses = data.courses.filter(c => c.id !== courseId);
-                    data.users.forEach(u => {
-                        u.enrolledCourses = u.enrolledCourses.filter(e => e.courseId !== courseId);
-                    });
-                    break;
-            }
+        if (course) {
+            // Populate modal with course data
+            const modal = document.getElementById('editCourseModal');
+            modal.dataset.courseId = courseId;
             
-            await saveData(data);
-            await renderCourses();
-        } catch (error) {
-            console.error('Action failed:', error);
-            alert('Operation failed');
+            // Set form values
+            document.getElementById('editCourseTitle').value = course.title;
+            document.getElementById('editCourseDescription').value = course.description;
+            document.getElementById('editCourseImage').value = course.image;
+            
+            // Update preview image if exists
+            const previewImg = modal.querySelector('.preview-img');
+            const placeholder = modal.querySelector('.upload-placeholder');
+            if (course.image) {
+                previewImg.src = `../${course.image}`;
+                previewImg.classList.remove('d-none');
+                placeholder.classList.add('d-none');
+            } else {
+                previewImg.classList.add('d-none');
+                placeholder.classList.remove('d-none');
+            }
+        }
+    });
+
+    // Handle form submission
+    document.getElementById('editCourseForm')?.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const modal = document.getElementById('editCourseModal');
+        const courseId = parseInt(modal.dataset.courseId);
+        const data = await getData();
+        const courseIndex = data.courses.findIndex(c => c.id === courseId);
+        
+        if (courseIndex !== -1) {
+            // Update course data
+            data.courses[courseIndex] = {
+                ...data.courses[courseIndex],
+                title: document.getElementById('editCourseTitle').value.trim(),
+                description: document.getElementById('editCourseDescription').value.trim(),
+                image: document.getElementById('editCourseImage').value.trim()
+            };
+            
+            try {
+                await saveData(data);
+                
+                // Hide modal
+                const modalInstance = bootstrap.Modal.getInstance(modal);
+                modalInstance.hide();
+                
+                // Show success toast
+                const toast = new bootstrap.Toast(document.getElementById('courseAddedToast'));
+                document.querySelector('.toast-body').innerHTML = 
+                    '<i class="fas fa-check-circle me-2"></i>Course updated successfully!';
+                toast.show();
+                
+                // Refresh courses display
+                await renderCourses();
+            } catch (error) {
+                console.error('Failed to update course:', error);
+                alert('Failed to update course. Please try again.');
+            }
+        }
+    });
+
+    // Reset form on modal close
+    document.getElementById('editCourseModal')?.addEventListener('hidden.bs.modal', function() {
+        this.querySelector('form').reset();
+        const previewImg = this.querySelector('.preview-img');
+        const placeholder = this.querySelector('.upload-placeholder');
+        previewImg.classList.add('d-none');
+        placeholder.classList.remove('d-none');
+    });
+
+    // Handle delete functionality
+    document.addEventListener('click', async function(e) {
+        const deleteBtn = e.target.closest('.delete-btn');
+        if (!deleteBtn) return;
+        
+        if (confirm('Are you sure you want to delete this course?')) {
+            const courseId = parseInt(deleteBtn.dataset.courseId);
+            const data = await getData();
+            
+            data.courses = data.courses.filter(c => c.id !== courseId);
+            data.users.forEach(u => {
+                u.enrolledCourses = u.enrolledCourses.filter(e => e.courseId !== courseId);
+            });
+            
+            try {
+                await saveData(data);
+                await renderCourses();
+                
+                // Show success toast
+                const toast = new bootstrap.Toast(document.getElementById('courseAddedToast'));
+                document.querySelector('.toast-body').innerHTML = 
+                    '<i class="fas fa-check-circle me-2"></i>Course deleted successfully!';
+                toast.show();
+            } catch (error) {
+                console.error('Failed to delete course:', error);
+                alert('Failed to delete course. Please try again.');
+            }
         }
     });
 

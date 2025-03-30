@@ -131,7 +131,7 @@
     <!-- Floating Add Button -->
     <button class="floating-add-btn" id="addCourseBtn">
         <i class="fas fa-edit"></i>
-        Create Post
+        Add Course
     </button>
 
     <!-- Add Course Modal -->
@@ -238,6 +238,68 @@
                     Course added successfully!
                 </div>
                 <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Course Modal -->
+    <div class="modal fade" id="editCourseModal" tabindex="-1" aria-labelledby="editCourseModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editCourseModalLabel">
+                        <i class="fas fa-edit me-2"></i>Edit Course
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="editCourseForm" novalidate>
+                    <div class="modal-body">
+                        <!-- Cover Image Preview -->
+                        <div class="cover-image-preview mb-4" id="editImagePreview">
+                            <div class="upload-placeholder">
+                                <i class="fas fa-image"></i>
+                                <p>Click to upload new cover image</p>
+                            </div>
+                            <img src="" alt="" class="preview-img d-none">
+                        </div>
+                        
+                        <!-- Title Field -->
+                        <div class="form-group mb-4">
+                            <label for="editCourseTitle" class="form-label">Course Title</label>
+                            <input type="text" class="form-control" id="editCourseTitle" required>
+                            <div class="invalid-feedback">Please enter a course title.</div>
+                        </div>
+
+                        <!-- Description Field -->
+                        <div class="form-group mb-4">
+                            <label for="editCourseDescription" class="form-label">Course Description</label>
+                            <textarea class="form-control" id="editCourseDescription" rows="4" required></textarea>
+                            <div class="invalid-feedback">Please enter a course description.</div>
+                        </div>
+
+                        <!-- Image URL Field -->
+                        <div class="form-group">
+                            <label for="editCourseImage" class="form-label">Image URL</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-link"></i></span>
+                                <input type="url" class="form-control" id="editCourseImage" 
+                                       placeholder="Enter image URL">
+                                <button class="btn btn-outline-secondary" type="button" id="editUploadImageBtn">
+                                    <i class="fas fa-upload"></i> Upload
+                                </button>
+                            </div>
+                            <div class="form-text">Upload a new cover image or provide an image URL</div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                            <i class="fas fa-times me-2"></i>Cancel
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save me-2"></i>Save Changes
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
