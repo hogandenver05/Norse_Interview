@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             const completion = isEnrolled ? user.enrolledCourses.find(e => e.courseId === course.id).completion : 0;
     
             const card = `
-                <div class="col-md-4 mb-4">
+                <div class="col-md-3 mb-4">
                     <div class="card h-100" data-course-id="${course.id}">
                         <div class="card-image">
                             <img src="../${course.image}" alt="${course.title}">
@@ -286,17 +286,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     // Initial setup
-    document.querySelector('.username').textContent = currentUser;
     const data = await getData();
-    if (isAdmin(data)) {
-        document.querySelector('.username').textContent += ' (Admin)';
-        // Remove the old add course button
-        const adminAddCourse = document.getElementById('admin-add-course');
-        if (adminAddCourse) {
-            adminAddCourse.remove();
-        }
-    }
-    
     await renderCourses();
 });
 
