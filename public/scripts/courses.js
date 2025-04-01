@@ -305,18 +305,18 @@ document.getElementById('backToDashboardBtn').addEventListener('click', function
     loadDashboardContent();
 });
 
-// Handle draft saving
-document.getElementById('saveDraftBtn').addEventListener('click', function() {
-    // Save draft logic here
+// // Handle draft saving
+// document.getElementById('saveDraftBtn').addEventListener('click', function() {
+//     // Save draft logic here
     
-    // Show brief toast notification
-    const toast = new bootstrap.Toast(document.getElementById('courseAddedToast'));
-    document.querySelector('.toast-body').innerHTML = '<i class="fas fa-save me-2"></i>Draft saved successfully!';
-    toast.show();
+//     // Show brief toast notification
+//     const toast = new bootstrap.Toast(document.getElementById('courseAddedToast'));
+//     document.querySelector('.toast-body').innerHTML = '<i class="fas fa-save me-2"></i>Draft saved successfully!';
+//     toast.show();
     
-    // Close the modal
-    addCourseModal.hide();
-});
+//     // Close the modal
+//     addCourseModal.hide();
+// });
 
 // Prevent accidental navigation
 window.addEventListener('beforeunload', function(e) {
