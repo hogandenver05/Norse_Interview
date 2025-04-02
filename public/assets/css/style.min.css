@@ -1419,7 +1419,7 @@ textarea.form-control {
 }
 
 .bg-footer {
-	border-top: 1px solid #efefef;
+	/* border-top: 1px solid #efefef; */
 	padding: 25px 0px 25px 0px
 }
 

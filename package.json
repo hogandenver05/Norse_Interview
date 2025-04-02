@@ -1,26 +1,7 @@
 {
-  "name": "student_interview",
-  "version": "1.0.0",
-  "description": "A career help hub for college students looking to secure their next job.",
-  "type": "module",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/hogandenver05/Student_Interview.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/hogandenver05/Student_Interview/issues"
-  },
-  "homepage": "https://github.com/hogandenver05/Student_Interview#readme",
   "dependencies": {
-    "body-parser": "^1.20.3",
-    "node-fetch": "^3.3.2"
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "fs": "^0.0.1-security"
   }
 }

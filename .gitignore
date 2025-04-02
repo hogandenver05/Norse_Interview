@@ -15,3 +15,7 @@ Thumbs.db
 # Ignore IDE-specific files
 .vscode/
 .idea/
+
+# Ignore source maps
+*.css.map
+*.js.map

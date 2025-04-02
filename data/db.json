@@ -1,88 +1,103 @@
 {
-    "users": [
+  "users": [
+    {
+      "username": "hogand6",
+      "password": "admin",
+      "isAdmin": true,
+      "isLoggedIn": false,
+      "enrolledCourses": []
+    },
+    {
+      "username": "johndoe",
+      "password": "password",
+      "isAdmin": false,
+      "isLoggedIn": false,
+      "enrolledCourses": [
         {
-            "username": "hogand6",
-            "password": "admin",
-            "isAdmin": true,
-            "isLoggedIn": false,
-            "enrolledCourses": []
-        },
-        {
-            "username": "johndoe",
-            "password": "password",
-            "isAdmin": false,
-            "isLoggedIn": false,
-            "enrolledCourses": [
-                { "courseId": 1, "completion": 75 },
-                { "courseId": 2, "completion": 50 }
-            ]
-        },
-        {
-            "username": "spongebob",
-            "password": "else",
-            "isAdmin": false,
-            "isLoggedIn": false,
-            "enrolledCourses": [
-                { "courseId": 6, "completion": 0 },
-                { "courseId": 7, "completion": 0 },
-                { "courseId": 8, "completion": 0 }
-            ]
+          "courseId": 2,
+          "completion": 50
         }
-    ],
-    "courses": [
+      ]
+    },
+    {
+      "username": "spongebob",
+      "password": "else",
+      "isAdmin": false,
+      "isLoggedIn": false,
+      "enrolledCourses": [
         {
-            "id": 1,
-            "title": "Technical Interview Prep",
-            "description": "Prepare for technical interviews with coding challenges and mock interviews.",
-            "image": "assets/images/course1.jpg"
+          "courseId": 2,
+          "completion": 10
         },
         {
-            "id": 2,
-            "title": "Behavioral Interview Prep",
-            "description": "Learn how to answer common behavioral interview questions.",
-            "image": "assets/images/course2.jpg"
+          "courseId": 3,
+          "completion": 20
         },
         {
-            "id": 3,
-            "title": "Resume Building",
-            "description": "Create a standout resume with our expert guidance.",
-            "image": "assets/images/course3.jpg"
+          "courseId": 4,
+          "completion": 30
         },
         {
-            "id": 4,
-            "title": "LinkedIn Optimization",
-            "description": "Optimize your LinkedIn profile to attract recruiters.",
-            "image": "assets/images/course4.jpg"
-        },
-        {
-            "id": 5,
-            "title": "Networking Strategies",
-            "description": "Learn effective networking strategies to expand your professional connections.",
-            "image": "assets/images/course5.jpg"
-        },
-        {
-            "id": 6,
-            "title": "Salary Negotiation",
-            "description": "Master the art of salary negotiation to get the best offer.",
-            "image": "assets/images/course6.jpg"
-        },
-        {
-            "id": 7,
-            "title": "Job Search Strategies",
-            "description": "Discover effective job search strategies to land your dream job.",
-            "image": "assets/images/course7.jpg"
-        },
-        {
-            "id": 8,
-            "title": "Interview Follow-Up",
-            "description": "Learn how to follow up after an interview to leave a lasting impression.",
-            "image": "assets/images/course8.jpg"
-        },
-        {
-            "id": 9,
-            "title": "Personal Branding",
-            "description": "Build a strong personal brand to stand out in the job market.",
-            "image": "assets/images/course9.jpg"
+          "courseId": 9,
+          "completion": 40
         }
-    ]
+      ]
+    }
+  ],
+  "courses": [
+    {
+      "id": 2,
+      "title": "Behavioral Interview Prep",
+      "description": "Learn how to answer common behavioral interview questions.",
+      "image": "../assets/images/course2.jpg"
+    },
+    {
+      "id": 3,
+      "title": "Resume Building",
+      "description": "Create a standout resume with our expert guidance.",
+      "image": "../assets/images/course3.jpg"
+    },
+    {
+      "id": 4,
+      "title": "LinkedIn Optimization",
+      "description": "Optimize your LinkedIn profile to attract recruiters.",
+      "image": "../assets/images/course4.jpg"
+    },
+    {
+      "id": 5,
+      "title": "Networking Strategies",
+      "description": "Learn effective networking strategies to expand your professional connections.",
+      "image": "../assets/images/course5.jpg"
+    },
+    {
+      "id": 6,
+      "title": "Salary Negotiation",
+      "description": "Master the art of salary negotiation to get the best offer.",
+      "image": "../assets/images/course6.jpg"
+    },
+    {
+      "id": 7,
+      "title": "Job Search Strategies",
+      "description": "Discover effective job search strategies to land your dream job.",
+      "image": "../assets/images/course7.jpg"
+    },
+    {
+      "id": 8,
+      "title": "Interview Follow-Up",
+      "description": "Learn how to follow up after an interview to leave a lasting impression.",
+      "image": "../assets/images/course8.jpg"
+    },
+    {
+      "id": 9,
+      "title": "Personal Branding",
+      "description": "Build a strong personal brand to stand out in the job market.",
+      "image": "../assets/images/course9.jpg"
+    },
+    {
+      "id": 1743557316748,
+      "title": "Test Course",
+      "description": "THIS IS A TEST!!",
+      "image": "https://bettsrecruiting.com/wp-content/uploads/2021/05/christina-wocintechchat-com-LQ1t-8Ms5PY-unsplash-scaled.jpg"
+    }
+  ]
 }

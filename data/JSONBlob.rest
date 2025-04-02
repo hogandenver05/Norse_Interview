@@ -1,3 +1,0 @@
-### This GET request gets the data from JSONblob.com
-GET https://jsonblob.com/api/jsonBlob/1352447312428982272
-

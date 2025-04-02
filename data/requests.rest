@@ -1,0 +1,25 @@
+### HTML ENDPOINT: Get the index
+GET http://127.0.0.1:3000/
+
+### HTML API DOCUMENTATION
+GET http://127.0.0.1:3000/detail
+
+
+### API ENDPOINTS
+### Retrieve the content of a document 
+GET http://127.0.0.1:3000/api
+
+### Update the content of a document
+POST http://127.0.0.1:3000/api
+Content-Type: application/json
+
+{"test": true}
+
+### Change the content of a document
+PUT http://127.0.0.1:3000/api
+Content-Type: application/json
+
+{"test": true}
+
+### Delete the content of a document
+DELETE http://127.0.0.1:3000/api

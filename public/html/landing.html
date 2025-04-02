@@ -7,26 +7,26 @@
     <meta name="description" content="Welcome to Norse Interview Platform" />
     <meta name="keywords" content="interview, courses, learning" />
 
-    <link rel="shortcut icon" href="../assets/icons/favicon/favicon-96x96.png" />
-    <link rel="icon" type="image/png" href="../assets/icons/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="shortcut icon" href="/assets/icons/favicon/favicon-96x96.png" />
+    <link rel="icon" type="image/png" href="/assets/icons/favicon/favicon-96x96.png" sizes="96x96" />
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Custom CSS -->
-    <link rel="stylesheet" type="text/css" href="../assets/css/style.min.css" />
-    <link rel="stylesheet" type="text/css" href="../assets/css/landing.css">
-    <link rel="stylesheet" href="../assets/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/style.min.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/landing.css">
+    <link rel="stylesheet" href="/assets/css/index.css">
 </head>
 <body>
     <!-- START NAVBAR -->
     <nav class="navbar navbar-expand-lg fixed-top navbar-custom sticky sticky-dark" id="navbar">
         <div class="container">
             <!-- LOGO -->
-            <a class="navbar-brand logo text-uppercase" href="../index.html">
-                <img src="../assets/images/full-logo-white.png" class="logo-light" alt="Logo" height="40">
-                <img src="../assets/images/norse-white.png" class="logo-light" alt="Norse" height="25">
+            <a class="navbar-brand logo text-uppercase" href="/">
+                <img src="/assets/images/full-logo-white.png" class="logo-light" alt="Logo" height="40">
+                <img src="/assets/images/norse-white.png" class="logo-light" alt="Norse" height="25">
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
@@ -37,13 +37,13 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav ms-auto" id="navbar-navlist">
                     <li class="nav-item">
-                        <a class="nav-link" href="dashboard.html">
+                        <a class="nav-link" href="#">
                             <i class="fas fa-home"></i> Dashboard
                         </a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-user-circle"></i> Profile
+                            <i class="fas fa-user-circle"></i> <span class="username">Profile</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
                             <li>
@@ -58,7 +58,7 @@
                             </li>
                             <li><hr class="dropdown-divider"></li>
                             <li>
-                                <a class="dropdown-item text-danger" href="landing.html">
+                                <a class="dropdown-item text-danger" href="/">
                                     <i class="fas fa-sign-out-alt"></i> Logout
                                 </a>
                             </li>
@@ -87,7 +87,7 @@
                 <span class="card-button">Start Practicing</span>
             </a>
 
-            <a href="courses.html" class="card">
+            <a href="courses" class="card">
                 <div class="card-icon">
                     <i class="fas fa-graduation-cap"></i>
                 </div>
@@ -105,7 +105,7 @@
             <div class="row align-items-center">
                 <div class="col-md-6">
                     <div class="text-md-start">
-                        <img src="../assets/images/full-logo-white.png" alt="NKU Logo">
+                        <img src="/assets/images/full-logo-white.png" alt="NKU Logo">
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -119,10 +119,12 @@
     <!-- END FOOTER -->
 
     <!-- Scripts -->
-    <script src="../scripts/bootstrap.bundle.min.js"></script>
+    <script src="/scripts/bootstrap.bundle.min.js"></script>
     <script>
         const currentUser = "hogand6";
-        document.querySelector('.username').textContent = currentUser;
+        document.querySelectorAll('.username').forEach(each => {
+            each.textContent = currentUser;
+        });
     </script>
 </body>
 </html>
