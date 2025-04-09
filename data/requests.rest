@@ -1,5 +1,12 @@
-### HTML ENDPOINT: Get the index
+### HTML ENDPOINTs 
+### Get the index
 GET http://127.0.0.1:3000/
+
+### Get the index
+GET http://127.0.0.1:3000/
+
+### Get the homepage
+GET http://127.0.0.1:3000/pages/homepage
 
 ### HTML API DOCUMENTATION
 GET http://127.0.0.1:3000/detail

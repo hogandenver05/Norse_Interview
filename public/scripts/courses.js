@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", async () => {
     const SERVER_URL = "http://localhost:3000/api";
-    const currentUser = 'spongebob';
+    const currentUser = 'hogand6';
     let courseToDelete = null;
 
     const initializeModals = () => {

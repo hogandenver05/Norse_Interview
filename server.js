@@ -10,9 +10,16 @@ app.use(express.json());
 app.use(express.static('public')); 
 app.use(cors());
 
+
+/* HTML ENDPOINTS */
+// HTML catchall
+app.use((req,res,next)=>{
+	if(fs.existsSync(`./public${req.url}.html`)) res.send(fs.readFileSync(`./public${req.url}.html`,'utf8'));
+	else next();
+});
+
 // Serve index.html
 app.get('/', (req, res) => {
-
     let filePath = "./public/index.html";
 
     if (fs.existsSync(filePath)) {
@@ -23,14 +30,8 @@ app.get('/', (req, res) => {
     }
 });
 
-/* HTML ENDPOINTS */
 app.get('/detail', (req, res) => {
-    let filePath = "";
-    res.send('HTML ENDPOINT: detail');
-});
-
-app.get('/html/landing', (req, res) => {
-    let filePath = "./public/html/landing.html";
+    let filePath = "./public/detail.html";
 
     if (fs.existsSync(filePath)) {
         let html = fs.readFileSync(filePath, 'utf8');
@@ -39,18 +40,6 @@ app.get('/html/landing', (req, res) => {
         res.status(404).send("404 page not found");
     }
 });
-
-app.get('/html/courses', (req, res) => {
-    let filePath = "./public/html/courses.html";
-
-    if (fs.existsSync(filePath)) {
-        let html = fs.readFileSync(filePath, 'utf8');
-        res.send(html);
-    } else {
-        res.status(404).send("404 page not found");
-    }
-});
-
 
 /* API ENDPOINTS */
 app.get("/api", (req, res) => {
