@@ -17,7 +17,7 @@ body {
 }
 
 .navbar {
-    background: var(--nku-black) !important;
+    background: var(--nku-white);
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     padding: 1rem 0;
 }
@@ -85,7 +85,7 @@ body {
     color: var(--nku-black);
 }
 
-.landing-container {
+.dashboard-container {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -98,7 +98,7 @@ body {
     overflow: hidden;
 }
 
-.landing-container::before {
+.dashboard-container::before {
     content: '';
     position: absolute;
     top: 0;
@@ -273,7 +273,7 @@ body {
         font-size: 1.25rem;
     }
 
-    .landing-container {
+    .dashboard-container {
         padding: 3rem 1.5rem;
     }
 

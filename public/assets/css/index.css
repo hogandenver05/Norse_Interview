@@ -32,7 +32,7 @@ body {
 }
 
 .navbar-brand img {
-    height: 40px !important;
+    /* height: 40px !important; */
     width: auto;
 }
 
@@ -94,7 +94,7 @@ body {
 
 .bg-overlay {
     background: url('../images/pattern-dark.png') center repeat;
-    opacity: 0.4;
+    opacity: 0.6;
     position: absolute;
     top: 0;
     left: 0;
