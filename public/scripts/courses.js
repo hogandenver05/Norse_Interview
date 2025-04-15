@@ -142,6 +142,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     };
 
+    // FIXME: Fix create course
     const createNewCourse = async (formData) => {
         const data = await fetchData();
         const newCourse = {
@@ -157,6 +158,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         toast.show();
     };
 
+    // FIXME: Fix edit course
     const handleCourseUpdate = async (e) => {
         e.preventDefault();
         const modal = document.getElementById('editCourseModal');

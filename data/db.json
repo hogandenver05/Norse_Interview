@@ -1,14 +1,21 @@
 {
   "users": [
     {
+      "firstnanme": "Denver",
+      "lastName": "Hogan",
+      "email": "hogand6@nku.edu",
       "username": "hogand6",
       "password": "admin",
       "isAdmin": true,
-      "isLoggedIn": false,
-      "enrolledCourses": []
+      "isLoggedIn": true,
+      "enrolledCourses": [],
+      "interviews": []
     },
     {
-      "username": "johndoe",
+      "firstnanme": "John",
+      "lastName": "Doe",
+      "email": "doej1@nku.edu",
+      "username": "doej1",
       "password": "password",
       "isAdmin": false,
       "isLoggedIn": false,
@@ -17,10 +24,14 @@
           "courseId": 2,
           "completion": 50
         }
-      ]
+      ],
+      "interviews": []
     },
     {
-      "username": "spongebob",
+      "firstnanme": "Spongebob",
+      "lastName": "Squarepants",
+      "email": "squarepantss1@nku.edu",
+      "username": "squarepantss1",
       "password": "else",
       "isAdmin": false,
       "isLoggedIn": false,
@@ -41,7 +52,8 @@
           "courseId": 9,
           "completion": 40
         }
-      ]
+      ],
+      "interviews": []
     }
   ],
   "courses": [
@@ -92,12 +104,6 @@
       "title": "Personal Branding",
       "description": "Build a strong personal brand to stand out in the job market.",
       "image": "../assets/images/course9.jpg"
-    },
-    {
-      "id": 1743557316748,
-      "title": "Test Course",
-      "description": "THIS IS A TEST!!",
-      "image": "https://bettsrecruiting.com/wp-content/uploads/2021/05/christina-wocintechchat-com-LQ1t-8Ms5PY-unsplash-scaled.jpg"
     }
   ]
 }
