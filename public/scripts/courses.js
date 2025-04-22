@@ -1,31 +1,19 @@
 document.addEventListener("DOMContentLoaded", async () => {
     const SERVER_URL = "http://localhost:3000/api";
-    const currentUser = 'hogand6';
-    let courseToDelete = null;
+    const CURRENT_USER = 'admin';
 
-    const initializeModals = () => {
-        return {
-            addCourse: new bootstrap.Modal('#addCourseModal'),
-            success: new bootstrap.Modal('#successModal'),
-            deleteConfirm: new bootstrap.Modal('#deleteConfirmModal'),
-            editCourse: new bootstrap.Modal('#editCourseModal')
-        };
-    };
-
-    const modals = initializeModals();
-    const toast = new bootstrap.Toast('#courseAddedToast');
-
-    const fetchData = async () => {
+    const fetchData = async (data) => {
         try {
-            const response = await fetch(SERVER_URL);
+            const response = await fetch(`${SERVER_URL}/${data}`); 
             return await response.json();
         } catch (error) {
             console.error('Fetch error:', error);
-            return { users: [], courses: [] };
+            return [];
         }
     };
 
-    const persistData = async (data) => {
+
+    const saveData = async (data) => {
         try {
             await fetch(SERVER_URL, {
                 method: 'PUT',
@@ -37,35 +25,18 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     };
 
-    const checkAdminStatus = (data) => {
-        const user = data.users.find(u => u.username === currentUser);
-        return user?.isAdmin ?? false;
-    };
 
-    const handleImageUpload = (file, previewSelector, placeholderSelector, urlField) => {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            const preview = document.querySelector(previewSelector);
-            const placeholder = document.querySelector(placeholderSelector);
-            
-            preview.src = e.target.result;
-            preview.classList.remove('d-none');
-            placeholder.classList.add('d-none');
-            document.querySelector(urlField).value = e.target.result;
-        };
-        reader.readAsDataURL(file);
-    };
-
+    /* Course cards */
     const createCourseCard = (course, isAdminUser, user) => {
-        const isEnrolled = user?.enrolledCourses?.some(e => e.courseId === course.id);
-        const completion = isEnrolled ? user.enrolledCourses.find(e => e.courseId === course.id).completion : 0;
-
+        const isEnrolled = user?.enrolledCourses?.some(e => e.courseId === course._id);
+        const completion = isEnrolled ? user.enrolledCourses.find(e => e.courseId === course._id).completion : 0;
+        
         return `
             <div class="col-md-3 mb-4">
-                <div class="card h-100" data-course-id="${course.id}">
+                <div class="card h-100" data-course-id="${course._id}">
                     <div class="card-image">
-                        <img src="${course.image}" alt="${course.title}">
-                        ${isAdminUser ? adminControls(course.id) : enrollmentStatus(isEnrolled, completion)}
+                        <img src="../assets/images/${course.image}" alt="${course.title}">
+                        ${isAdminUser ? adminControls(course._id) : enrollmentStatus(isEnrolled, completion)}
                         <div class="card-overlay">
                             <h5 class="card-title">${course.title}</h5>
                             <p class="card-description">${course.description}</p>
@@ -75,6 +46,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             </div>`;
     };
 
+
     const adminControls = (courseId) => `
         <button class="edit-btn" data-course-id="${courseId}" data-bs-toggle="modal" data-bs-target="#editCourseModal">
             <i class="fas fa-pencil-alt"></i>
@@ -83,50 +55,62 @@ document.addEventListener("DOMContentLoaded", async () => {
             <i class="fas fa-trash"></i>
         </button>`;
 
+
     const enrollmentStatus = (isEnrolled, completion) => isEnrolled ? `
         <div class="enrollment-status enrolled">
             <i class="fas fa-check-circle me-1"></i>${completion}% Complete
         </div>` : '';
 
-    const setupEventListeners = () => {
-        document.getElementById('addCourseForm')?.addEventListener('submit', handleCourseSubmission);
-        document.getElementById('addCourseBtn')?.addEventListener('click', () => modals.addCourse.show());
-        document.getElementById('confirmDelete')?.addEventListener('click', handleCourseDeletion);
-        document.getElementById('editCourseForm')?.addEventListener('submit', handleCourseUpdate);
-        document.getElementById('backToDashboardBtn')?.addEventListener('click', resetForm);
-        document.addEventListener('click', handleDynamicElements);
-        setupImageUpload();
-    };
 
-    const handleDynamicElements = async (e) => {
-        if (e.target.closest('.edit-btn')) handleEditClick(e);
-        if (e.target.closest('.delete-btn')) handleDeleteClick(e);
-    };
+    const renderCourses = async () => {
+        const user = await fetchData('users/' + CURRENT_USER);
+        const isAdminUser = user?.isAdmin;
+        const courses = await fetchData('courses');
 
-    const handleEditClick = async (e) => {
-        const courseId = e.target.closest('.edit-btn').dataset.courseId;
-        const data = await fetchData();
-        const course = data.courses.find(c => c.id === parseInt(courseId));
+        document.getElementById('addCourseBtn').style.display = isAdminUser ? 'flex' : 'none';
         
-        if (course) populateEditForm(course);
+        const containers = {
+            myCourses: document.getElementById('my-courses-container'),
+            library: document.getElementById('course-library-container')
+        };
+
+        containers.myCourses.innerHTML = '';
+        containers.library.innerHTML = '';
+        containers.myCourses.parentElement.style.display = isAdminUser ? 'none' : 'block';
+
+        courses.forEach(course => {
+            const container = user?.enrolledCourses?.some(e => e.courseId === course._id) && !isAdminUser 
+                ? containers.myCourses 
+                : containers.library;
+            container.innerHTML += createCourseCard(course, isAdminUser, user);
+        });
     };
 
-    const populateEditForm = (course) => {
-        const modal = document.getElementById('editCourseModal');
-        modal.dataset.courseId = course.id;
-        
-        document.getElementById('editCourseTitle').value = course.title;
-        document.getElementById('editCourseDescription').value = course.description;
-        document.getElementById('editCourseImage').value = course.image;
 
-        const previewImg = modal.querySelector('.preview-img');
-        const placeholder = modal.querySelector('.upload-placeholder');
-        previewImg.src = course.image || '';
-        previewImg.classList.toggle('d-none', !course.image);
-        placeholder.classList.toggle('d-none', !!course.image);
+    /* Creating courses */
+    const createNewCourse = async (formData) => {
+        try {
+            const newCourse = {
+                title: formData.title,
+                description: formData.description,
+                image: formData.imageUrl || 'assets/images/default-course.jpg'
+            };
+    
+            await fetch(`${SERVER_URL}/courses`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(newCourse)
+            });
+            
+            await renderCourses();
+            showToast('Course created successfully!');
+        } catch (error) {
+            showToast('Error creating course', 'error');
+        }
     };
 
-    const handleCourseSubmission = async (e) => {
+
+    const handleCourseCreation = async (e) => {
         e.preventDefault();
         const formData = {
             title: document.getElementById('courseTitle').value,
@@ -142,74 +126,100 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     };
 
-    // FIXME: Fix create course
-    const createNewCourse = async (formData) => {
-        const data = await fetchData();
-        const newCourse = {
-            id: Date.now(),
-            title: formData.title,
-            description: formData.description,
-            image: formData.imageUrl || 'assets/images/default-course.jpg'
-        };
 
-        data.courses.push(newCourse);
-        await persistData(data);
-        await renderCourses();
-        toast.show();
+    /* Editing courses */
+    const handleEditClick = async (e) => {
+        const courseId = e.target.closest('.edit-btn').dataset.courseId;
+        const course = await fetchData(`courses/${courseId}`);
+        
+        if (course) populateEditForm(course);
     };
-
-    // FIXME: Fix edit course
-    const handleCourseUpdate = async (e) => {
+    
+    
+    // FIXME: Network error thrown when trying to edit a course
+    const populateEditForm = (course) => {
+        const modal = document.getElementById('editCourseModal');
+        modal.dataset.courseId = course._id;
+        
+        document.getElementById('editCourseTitle').value = course.title;
+        document.getElementById('editCourseDescription').value = course.description;
+        document.getElementById('editCourseImage').value = course.image;
+        
+        const previewImg = modal.querySelector('.preview-img');
+        const placeholder = modal.querySelector('.upload-placeholder');
+        previewImg.src = course.image || '';
+        previewImg.classList.toggle('d-none', !course.image);
+        placeholder.classList.toggle('d-none', !!course.image);
+    };
+    
+    
+    const handleCourseEdit = async (e) => {
         e.preventDefault();
         const modal = document.getElementById('editCourseModal');
-        const courseId = parseInt(modal.dataset.courseId);
-        const data = await fetchData();
-        const courseIndex = data.courses.findIndex(c => c.id === courseId);
+        const courseId = modal.dataset.courseId;
 
-        if (courseIndex === -1) return;
-
-        data.courses[courseIndex] = {
-            ...data.courses[courseIndex],
+        const updates = {
             title: document.getElementById('editCourseTitle').value.trim(),
             description: document.getElementById('editCourseDescription').value.trim(),
             image: document.getElementById('editCourseImage').value.trim()
         };
-
-        await persistData(data);
-        modals.editCourse.hide();
-        await renderCourses();
-        showToast('Course updated successfully!');
+    
+        try {
+            await fetch(`${SERVER_URL}/courses/${courseId}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(updates)
+            });
+            
+            await renderCourses();
+            showToast('Course updated successfully!');
+            modals.editCourse.hide();
+        } catch (error) {
+            showToast('Error updating course', 'error');
+        }
     };
 
+
+    /* Deleting courses */
     const handleDeleteClick = (e) => {
-        courseToDelete = parseInt(e.target.closest('.delete-btn').dataset.courseId);
+        courseToDelete = e.target.closest('.delete-btn').dataset.courseId;
         modals.deleteConfirm.show();
     };
 
+
     const handleCourseDeletion = async () => {
-        if (!courseToDelete) return;
+    if (!courseToDelete) return;
 
-        const data = await fetchData();
-        data.courses = data.courses.filter(c => c.id !== courseToDelete);
-        data.users.forEach(u => {
-            if (u.enrolledCourses) {
-                u.enrolledCourses = u.enrolledCourses.filter(e => e.courseId !== courseToDelete);
-            }
+    try {
+        await fetch(`${SERVER_URL}/courses/${courseToDelete}`, {
+            method: 'DELETE'
         });
-
-        await persistData(data);
-        modals.deleteConfirm.hide();
-        courseToDelete = null;
+        
         await renderCourses();
         showToast('Course deleted successfully!');
+        modals.deleteConfirm.hide();
+        courseToDelete = null;
+    } catch (error) {
+        showToast('Error deleting course', 'error');
+    }
+};
+
+
+    /* Image upload */
+    const handleImageUpload = (file, previewSelector, placeholderSelector, urlField) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const preview = document.querySelector(previewSelector);
+            const placeholder = document.querySelector(placeholderSelector);
+            
+            preview.src = e.target.result;
+            preview.classList.remove('d-none');
+            placeholder.classList.add('d-none');
+            document.querySelector(urlField).value = e.target.result;
+        };
+        reader.readAsDataURL(file);
     };
 
-    const resetForm = () => {
-        modals.success.hide();
-        document.getElementById('addCourseForm').reset();
-        document.querySelector('.preview-img').classList.add('d-none');
-        document.querySelector('.upload-placeholder').classList.remove('d-none');
-    };
 
     const setupImageUpload = () => {
         const fileInput = document.createElement('input');
@@ -229,29 +239,32 @@ document.addEventListener("DOMContentLoaded", async () => {
         fileInput.addEventListener('change', handleFileSelect);
     };
 
-    const renderCourses = async () => {
-        const data = await fetchData();
-        const isAdminUser = checkAdminStatus(data);
-        const user = data.users.find(u => u.username === currentUser);
 
-        document.getElementById('addCourseBtn').style.display = isAdminUser ? 'flex' : 'none';
-        
-        const containers = {
-            myCourses: document.getElementById('my-courses-container'),
-            library: document.getElementById('course-library-container')
-        };
-
-        containers.myCourses.innerHTML = '';
-        containers.library.innerHTML = '';
-        containers.myCourses.parentElement.style.display = isAdminUser ? 'none' : 'block';
-
-        data.courses.forEach(course => {
-            const container = user?.enrolledCourses?.some(e => e.courseId === course.id) && !isAdminUser 
-                ? containers.myCourses 
-                : containers.library;
-            container.innerHTML += createCourseCard(course, isAdminUser, user);
-        });
+    /* Event listeners */
+    const setupEventListeners = () => {
+        document.getElementById('addCourseForm')?.addEventListener('submit', handleCourseCreation);
+        document.getElementById('addCourseBtn')?.addEventListener('click', () => modals.addCourse.show());
+        document.getElementById('confirmDelete')?.addEventListener('click', handleCourseDeletion);
+        document.getElementById('editCourseForm')?.addEventListener('submit', handleCourseEdit);
+        document.getElementById('backToCoursesBtn')?.addEventListener('click', resetForm);
+        document.addEventListener('click', handleDynamicElements);
+        setupImageUpload();
     };
+
+
+    const resetForm = () => {
+        modals.success.hide();
+        document.getElementById('addCourseForm').reset();
+        document.querySelector('.preview-img').classList.add('d-none');
+        document.querySelector('.upload-placeholder').classList.remove('d-none');
+    };
+
+
+    const handleDynamicElements = async (e) => {
+        if (e.target.closest('.edit-btn')) handleEditClick(e);
+        if (e.target.closest('.delete-btn')) handleDeleteClick(e);
+    };
+
 
     const showToast = (message, type = 'success') => {
         const toastBody = document.querySelector('.toast-body');
@@ -259,6 +272,20 @@ document.addEventListener("DOMContentLoaded", async () => {
         toast._element.classList.toggle('bg-danger', type !== 'success');
         toast.show();
     };
+
+
+    const initializeModals = () => {
+        return {
+            addCourse: new bootstrap.Modal('#addCourseModal'),
+            success: new bootstrap.Modal('#successModal'),
+            deleteConfirm: new bootstrap.Modal('#deleteConfirmModal'),
+            editCourse: new bootstrap.Modal('#editCourseModal')
+        };
+    };
+
+
+    const modals = initializeModals();
+    const toast = new bootstrap.Toast('#courseAddedToast');
 
     setupEventListeners();
     await renderCourses();

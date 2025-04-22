@@ -197,8 +197,8 @@
                     </div>
                     <h3 class="mb-3">Success!</h3>
                     <p class="mb-4">Your course has been published successfully.</p>
-                    <button type="button" class="btn btn-primary px-4 py-2" id="backToDashboardBtn">
-                        <i class="fas fa-home me-2"></i>Back to Dashboard
+                    <button type="button" class="btn btn-primary px-4 py-2" id="backToCoursesBtn">
+                        <i class="fas fas fa-graduation-cap me-2"></i>Back to Courses
                     </button>
                 </div>
             </div>
@@ -242,7 +242,7 @@
                         <div class="form-group">
                             <div class="input-group mb-3">
                                 <span class="input-group-text"><i class="fas fa-link"></i></span>
-                                <input type="url" class="form-control m-0" id="courseImage" 
+                                <input type="url" class="form-control m-0" id="editCourseImage" 
                                        placeholder="Paste an image URL">
                                 <button class="btn btn-outline-secondary" type="button" id="uploadImageBtn">
                                     <i class="fas fa-upload"></i> Upload
@@ -252,14 +252,14 @@
                         
                         <!-- Title Field -->
                         <div class="form-group mb-4">
-                            <input type="text" class="form-control form-control-lg" id="courseTitle" required 
+                            <input type="text" class="form-control form-control-lg" id="editCourseTitle" required 
                                    placeholder="Enter course title">
                             <div class="invalid-feedback">Please enter a title for your course.</div>
                         </div>
 
                         <!-- Description Field -->
                         <div class="form-group mb-4">
-                            <textarea class="form-control description-editor" id="courseDescription" rows="8" required
+                            <textarea class="form-control description-editor" id="editCourseDescription" rows="8" required
                                       placeholder="Write your course description here..."></textarea>
                             <div class="invalid-feedback">Please enter your course description.</div>
                         </div>

@@ -12,9 +12,19 @@ GET http://127.0.0.1:3000/pages/homepage
 GET http://127.0.0.1:3000/detail
 
 
+
 ### API ENDPOINTS
-### Retrieve the content of a document 
-GET http://127.0.0.1:3000/api
+### MongoDB Users
+GET http://127.0.0.1:3000/api/users
+
+### MongoDB single user
+GET http://127.0.0.1:3000/api/users/admin
+
+### MongoDB Courses
+GET http://127.0.0.1:3000/api/courses
+
+### MongoDB single course
+GET http://127.0.0.1:3000/api/courses/68014c3cd90a7b7c7ad7ee05
 
 ### Update the content of a document
 POST http://127.0.0.1:3000/api
