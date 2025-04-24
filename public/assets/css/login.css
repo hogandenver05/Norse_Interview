@@ -1,0 +1,104 @@
+/* General Styles */
+body {
+    background: var(--nku-gray) !important;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Login Container */
+.login-container {
+    max-width: 500px;
+    margin: 100px auto; /* Center the login form vertically and horizontally */
+    margin-block: 200px !important;
+    background: #ffffff; /* White background for the form */
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 30px;
+}
+
+/* Login Header */
+.login-header {
+    margin-bottom: 20px;
+}
+
+.login-header h1 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333333; /* Dark gray text */
+}
+
+.login-header p {
+    font-size: 14px;
+    color: #666666; /* Lighter gray text */
+}
+
+/* Form Styles */
+.login-form .form-label {
+    font-weight: bold;
+    color: #333333;
+}
+
+.login-form .form-control {
+    border-radius: 5px;
+    border: 1px solid #ced4da; /* Light gray border */
+    padding: 10px;
+    font-size: 14px;
+}
+
+.login-form .form-control:focus {
+    border-color: #007bff; /* Blue border on focus */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Blue glow */
+}
+
+.login-form .btn-primary {
+    background-color: #007bff; /* Blue button */
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.login-form .btn-primary:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Links */
+.login-form-container a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.login-form-container a:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+.bg-footer {
+    background-color: #343a40; /* Dark gray background */
+    color: #ffffff; /* White text */
+    padding: 20px 0;
+}
+
+.bg-footer p {
+    margin: 0;
+    font-size: 14px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .login-container {
+        margin: 50px auto;
+        padding: 20px;
+    }
+
+    .login-header h1 {
+        font-size: 24px;
+    }
+
+    .login-form .btn-primary {
+        font-size: 14px;
+    }
+}

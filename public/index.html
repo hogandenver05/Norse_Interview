@@ -45,7 +45,7 @@
                         <a class="nav-link" href="#contact">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="pages/dashboard">Login</a>
+                        <a class="nav-link" href="pages/login">Login</a>
                     </li>
                 </ul>
             </div>
@@ -69,18 +69,19 @@
 
                 <div class="col-lg-5 offset-lg-1">
                     <div class="home-registration-form">
-                        <h5 class="form-title text-center">Log In With Your NKU Email</h5>
-                        <form class="registration-form">
+                        <h5 class="form-title text-center">Sign Up With Your NKU Email</h5>
+                        <form id="signupForm" class="registration-form">
                             <div class="mb-3">
                                 <label class="form-label">Email</label>
-                                <input type="email" id="inputEmail" placeholder="doej1@nku.edu" class="form-control registration-input-box">
+                                <input autocomplete="off" type="email" id="inputEmail" placeholder="doej1@nku.edu" class="form-control registration-input-box" required>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Password</label>
-                                <input type="password" id="inputPassword" placeholder="********" class="form-control registration-input-box">
+                                <input autocomplete="new-password" type="password" id="inputPassword" placeholder="********" class="form-control registration-input-box" required>
                             </div>
                             <button type="submit" class="btn btn-primary w-100">Let's Get Started!</button>
                         </form>
+                        <div class="text-center text-muted mt-3">or <a href="pages/login">log in here</a></div>
                     </div>
                 </div>
             </div>
@@ -146,21 +147,6 @@
         </div>
     </section>
     <!-- END SERVICES -->
-
-    <!-- START COUNTER -->
-    <!-- <section class="section bg-counter">
-        <div class="color-overlay"></div>
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-6">
-                    <div class="text-center text-white">
-                        <h3 class="mb-4">Let the numbers do the talking...</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> -->
-    <!-- END COUNTER -->
 
     <!-- START CONTACT -->
     <section class="section" id="contact">
@@ -303,6 +289,8 @@
 
     <!-- Bootstrap Bundle JS -->
     <script src="scripts/bootstrap.bundle.min.js"></script>
+    <!-- User Auth -->
+    <script src="scripts/signup.js"></script>
 </body>
 </html>
 </html>

@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome - Norse Interview</title>
-    <meta name="description" content="Welcome to Norse Interview Platform" />
-    <meta name="keywords" content="interview, courses, learning" />
+    <title>Login - Norse Interview</title>
 
     <link rel="shortcut icon" href="/assets/icons/favicon/favicon-96x96.png" />
     <link rel="icon" type="image/png" href="/assets/icons/favicon/favicon-96x96.png" sizes="96x96" />
@@ -17,10 +15,8 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="/assets/css/style.min.css" />
     <link rel="stylesheet" type="text/css" href="/assets/css/dashboard.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/login.css">
     <link rel="stylesheet" href="/assets/css/index.css">
-
-    <!-- User Auth -->
-    <script src="../scripts/auth.js"></script>
 </head>
 <body>
     <!-- START NAVBAR -->
@@ -37,7 +33,7 @@
                 <i class="fas fa-bars"></i>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarCollapse">
+            <!-- <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav ms-auto" id="navbar-navlist">
                     <li class="nav-item">
                         <a class="nav-link" href="#">
@@ -68,39 +64,40 @@
                         </ul>
                     </li>
                 </ul>
-            </div>
+            </div> -->
         </div>
     </nav>
     <!-- END NAVBAR -->
 
-    <!-- START MAIN SECTION -->
-    <main class="dashboard-container py-5">
-        <div class="greeting">
-            <h1>Welcome back, <span class="username"></span>!</h1>
-            <center><p>Prepare for Success, the Norse Way</p></center>
+    <!-- START LOGIN SECTION -->
+    <main class="login-container py-5">
+        <div class="login-header text-center">
+            <h1>Login to Your Account</h1>
         </div>
 
-        <div class="cards-container">
-            <a href="interview" class="card">
-                <div class="card-icon">
-                    <i class="fas fa-comments"></i>
+        <div class="login-form-container">
+            <form id="loginForm" class="login-form">
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input id="inputEmail" type="email" class="form-control" name="email" placeholder="doej1@nku.edu" required>
                 </div>
-                <h2>Interview Practice</h2>
-                <p>Master your interview skills with our comprehensive preparation platform. Get ready to showcase your potential.</p>
-                <span class="card-button">Start Practicing</span>
-            </a>
-
-            <a href="courses" class="card">
-                <div class="card-icon">
-                    <i class="fas fa-graduation-cap"></i>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input id="inputPassword" type="password" class="form-control" name="password" placeholder="********" required>
                 </div>
-                <h2>Course Library</h2>
-                <p>Access our curated collection of courses designed to enhance your knowledge and professional skills.</p>
-                <span class="card-button">Explore Courses</span>
-            </a>
+                <!-- <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="rememberMe" name="rememberMe">
+                    <label class="form-check-label" for="rememberMe">Remember Me</label>
+                </div> -->
+                <button type="submit" class="btn btn-primary w-100">Login</button>
+            </form>
+            <div class="text-center mt-3">
+                <p>Don't have an account? <a href="/">Sign up</a></p>
+                <p><a href="/forgot-password">Forgot your password?</a></p>
+            </div>
         </div>
     </main>
-    <!-- END MAIN SECTION -->
+    <!-- END LOGIN SECTION -->
 
     <!-- START FOOTER -->
     <footer class="bg-footer">
@@ -121,30 +118,9 @@
     </footer>
     <!-- END FOOTER -->
 
-    <!-- Scripts -->
+    <!-- Bootstrap Bundle JS -->
     <script src="/scripts/bootstrap.bundle.min.js"></script>
-    <script>
-        // Decode JWT to get user information
-        const decodeToken = (token) => {
-            try {
-                const payload = JSON.parse(atob(token.split('.')[1])); // Decode the payload
-                return payload;
-            } catch (error) {
-                console.error('Error decoding token:', error);
-                return null;
-            }
-        };
-        
-        document.addEventListener('DOMContentLoaded', function() {
-            // Get the current user from the token
-            const TOKEN = localStorage.getItem('token');
-            const CURRENT_USER = TOKEN ? decodeToken(TOKEN)?.email : null;
-            const username = CURRENT_USER ? CURRENT_USER.split('@')[0] : 'User';
-            
-            document.querySelectorAll('.username').forEach(each => {
-                each.textContent = username;
-            });
-        });
-    </script>
+    <!-- User Auth -->
+    <script src="/scripts/login.js"></script>
 </body>
 </html>

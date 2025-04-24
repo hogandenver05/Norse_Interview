@@ -1,6 +1,20 @@
 document.addEventListener("DOMContentLoaded", async () => {
     const SERVER_URL = "http://localhost:3000/api";
-    const CURRENT_USER = 'admin';
+    
+    
+    const decodeToken = (token) => {
+        try {
+            const payload = JSON.parse(atob(token.split('.')[1])); // Decode the payload
+            return payload;
+        } catch (error) {
+            console.error('Error decoding token:', error);
+            return null;
+        }
+    };
+
+    const TOKEN = localStorage.getItem('token');
+    const CURRENT_USER = TOKEN ? decodeToken(TOKEN)?.email : null;
+
 
     const fetchData = async (data) => {
         try {
@@ -9,19 +23,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         } catch (error) {
             console.error('Fetch error:', error);
             return [];
-        }
-    };
-
-
-    const saveData = async (data) => {
-        try {
-            await fetch(SERVER_URL, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            });
-        } catch (error) {
-            console.error('Save error:', error);
         }
     };
 
