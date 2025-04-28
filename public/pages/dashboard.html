@@ -24,8 +24,8 @@
 </head>
 <body>
     <!-- START NAVBAR -->
-    <nav class="navbar navbar-expand-lg fixed-top navbar-custom sticky sticky-dark" id="navbar">
-        <div class="container">
+    <nav class="navbar navbar-expand-lg fixed-top navbar-custom sticky sticky-light px-5" id="navbar">
+        <div class="container-fluid">
             <!-- LOGO -->
             <a class="navbar-brand logo text-uppercase" href="/">
                 <img src="/assets/images/full-logo-white.png" alt="NKU Logo" height="50">
@@ -123,28 +123,6 @@
 
     <!-- Scripts -->
     <script src="/scripts/bootstrap.bundle.min.js"></script>
-    <script>
-        // Decode JWT to get user information
-        const decodeToken = (token) => {
-            try {
-                const payload = JSON.parse(atob(token.split('.')[1])); // Decode the payload
-                return payload;
-            } catch (error) {
-                console.error('Error decoding token:', error);
-                return null;
-            }
-        };
-        
-        document.addEventListener('DOMContentLoaded', function() {
-            // Get the current user from the token
-            const TOKEN = localStorage.getItem('token');
-            const CURRENT_USER = TOKEN ? decodeToken(TOKEN)?.email : null;
-            const username = CURRENT_USER ? CURRENT_USER.split('@')[0] : 'User';
-            
-            document.querySelectorAll('.username').forEach(each => {
-                each.textContent = username;
-            });
-        });
-    </script>
+    <script src="/scripts/personalize.js"></script>
 </body>
 </html>

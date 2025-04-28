@@ -7,6 +7,17 @@
     --nku-gray: #f4f4f4;
 }
 
+.container, .container-fluid {
+    max-width: none !important;
+    width: 80%;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.container {
+    width: 75%;
+}
+
 /* Navbar Styles */
 .navbar {
     background: var(--nku-black) !important;
@@ -342,7 +353,20 @@
 }
 
 /* Enrollment Status */
-.enrollment-status {
+.enrollment-status{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    background: var(--nku-yellow);
+    color: var(--nku-black);
+    z-index: 1;
+}
+
+.btn-enroll {
     position: absolute;
     top: 1rem;
     right: 1rem;

@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 <div class="card h-100" data-course-id="${course._id}">
                     <div class="card-image">
                         <img src="../assets/images/${course.image}" alt="${course.title}">
-                        ${isAdminUser ? adminControls(course._id) : enrollmentStatus(isEnrolled, completion)}
+                        ${isAdminUser ? adminControls(course._id) : enrollmentStatus(isEnrolled, completion, course._id)}
                         <div class="card-overlay">
                             <h5 class="card-title">${course.title}</h5>
                             <p class="card-description">${course.description}</p>
@@ -57,10 +57,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         </button>`;
 
 
-    const enrollmentStatus = (isEnrolled, completion) => isEnrolled ? `
+    const enrollmentStatus = (isEnrolled, completion, courseId) => isEnrolled ? `
         <div class="enrollment-status enrolled">
             <i class="fas fa-check-circle me-1"></i>${completion}% Complete
-        </div>` : '';
+        </div>`
+        : 
+        `<button class="btn btn-primary btn-enroll" data-course-id="${courseId}">
+            <i class="fas fa-plus-circle me-1"></i>Enroll
+        </button>`;
 
 
     const renderCourses = async () => {
@@ -124,6 +128,35 @@ document.addEventListener("DOMContentLoaded", async () => {
             modals.addCourse.hide();
             e.target.reset();
             modals.success.show();
+        }
+    };
+
+
+    /* Enrolling in courses */
+    const handleEnrollment = async (e) => {
+        const courseId = e.target.dataset.courseId;
+        // console.log('Course ID:', courseId);
+        // console.log('Current User:', CURRENT_USER);
+    
+        const user = await fetchData('users/' + CURRENT_USER);
+        // console.log('User Data:', user);
+    
+        if (user) {
+            const enrolledCourses = user.enrolledCourses || [];
+            const isEnrolled = enrolledCourses.some(e => e.courseId === courseId);
+            // console.log('Is Enrolled:', isEnrolled);
+    
+            if (!isEnrolled) {
+                enrolledCourses.push({ courseId, completion: 0 });
+                await fetch(`${SERVER_URL}/enroll`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: CURRENT_USER, courseId })
+                });
+    
+                showToast('Enrolled successfully!');
+                await renderCourses();
+            }
         }
     };
 
@@ -241,18 +274,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     };
 
 
-    /* Event listeners */
-    const setupEventListeners = () => {
-        document.getElementById('addCourseForm')?.addEventListener('submit', handleCourseCreation);
-        document.getElementById('addCourseBtn')?.addEventListener('click', () => modals.addCourse.show());
-        document.getElementById('confirmDelete')?.addEventListener('click', handleCourseDeletion);
-        document.getElementById('editCourseForm')?.addEventListener('submit', handleCourseEdit);
-        document.getElementById('backToCoursesBtn')?.addEventListener('click', resetForm);
-        document.addEventListener('click', handleDynamicElements);
-        setupImageUpload();
-    };
-
-
     const resetForm = () => {
         modals.success.hide();
         document.getElementById('addCourseForm').reset();
@@ -262,6 +283,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
     const handleDynamicElements = async (e) => {
+        if (e.target.closest('.btn-enroll')) handleEnrollment(e);
         if (e.target.closest('.edit-btn')) handleEditClick(e);
         if (e.target.closest('.delete-btn')) handleDeleteClick(e);
     };
@@ -282,6 +304,18 @@ document.addEventListener("DOMContentLoaded", async () => {
             deleteConfirm: new bootstrap.Modal('#deleteConfirmModal'),
             editCourse: new bootstrap.Modal('#editCourseModal')
         };
+    };
+
+
+    /* Event listeners */
+    const setupEventListeners = () => {
+        document.getElementById('addCourseForm')?.addEventListener('submit', handleCourseCreation);
+        document.getElementById('addCourseBtn')?.addEventListener('click', () => modals.addCourse.show());
+        document.getElementById('confirmDelete')?.addEventListener('click', handleCourseDeletion);
+        document.getElementById('editCourseForm')?.addEventListener('submit', handleCourseEdit);
+        document.getElementById('backToCoursesBtn')?.addEventListener('click', resetForm);
+        document.addEventListener('click', handleDynamicElements);
+        setupImageUpload();
     };
 
 

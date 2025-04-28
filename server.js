@@ -22,6 +22,8 @@ const client = new MongoClient(MONGO_URI, {
     }
 });
 
+const db = client.db("Norse_Interview");
+
 // Middleware to verify JWT
 function authenticateToken(req, res, next) {
     const token = req.headers['authorization']?.split(' ')[1]; // Bearer <token>
@@ -65,7 +67,7 @@ app.post('/api/signup', async (req, res) => {
 
     try {
         // Check if the user already exists
-        const existingUser = await client.db("Norse_Interview").collection("users").findOne({ email });
+        const existingUser = await db.collection("users").findOne({ email });
         if (existingUser) {
             return res.status(400).json({ error: "User already exists" });
         }
@@ -80,7 +82,7 @@ app.post('/api/signup', async (req, res) => {
             isAdmin: false,
             isLoggedIn: false
         };
-        await client.db("Norse_Interview").collection("users").insertOne(newUser);
+        await db.collection("users").insertOne(newUser);
 
         res.status(201).json({ message: "User created successfully" });
     } catch (error) {
@@ -95,7 +97,7 @@ app.post('/api/login', async (req, res) => {
 
     try {
         // Find user in the database
-        const user = await client.db("Norse_Interview").collection("users").findOne({ email });
+        const user = await db.collection("users").findOne({ email });
 
         if (!user || user.password !== password) {
             return res.status(401).send("Invalid email or password");
@@ -112,14 +114,14 @@ app.post('/api/login', async (req, res) => {
 
 // Get all users
 app.get('/api/users', async (req, res) => {
-    let users = await client.db("Norse_Interview").collection("users").find({}, { projection: { _id: false,  password: false } }).toArray();
+    let users = await db.collection("users").find({}, { projection: { _id: false,  password: false } }).toArray();
     res.json(users);
 });
 
 // Get user by email
 app.get('/api/users/:email', async (req, res) => {
     let _email = req.params.email;
-    let user = await client.db("Norse_Interview").collection("users").findOne({ email: _email }, { projection: { _id: false,  password: false } });
+    let user = await db.collection("users").findOne({ email: _email }, { projection: { _id: false,  password: false } });
     if (user) {
         res.json(user);
     } else {
@@ -129,14 +131,14 @@ app.get('/api/users/:email', async (req, res) => {
 
 // Get all courses
 app.get('/api/courses', async (req, res) => {
-    let courses = await client.db("Norse_Interview").collection("courses").find({}).toArray();
+    let courses = await db.collection("courses").find({}).toArray();
     res.json(courses);
 });
 
 // Get course by ID
 app.get('/api/courses/:id', async (req, res) => {
     let id = new ObjectId(req.params.id);
-    let course = await client.db("Norse_Interview").collection("courses").findOne({ _id: id });
+    let course = await db.collection("courses").findOne({ _id: id });
     if (course) {
         res.json(course);
     } else {
@@ -148,7 +150,7 @@ app.get('/api/courses/:id', async (req, res) => {
 app.post('/api/courses', async (req, res) => {
     try {
         const newCourse = req.body;
-        const result = await client.db("Norse_Interview").collection("courses").insertOne(newCourse);
+        const result = await db.collection("courses").insertOne(newCourse);
         res.status(201).json({ ...newCourse, _id: result.insertedId });
     } catch (error) {
         res.status(500).send("Error creating course");
@@ -161,7 +163,7 @@ app.put('/api/courses/:id', async (req, res) => {
         const id = new ObjectId(req.params.id);
         const updates = req.body;
         delete updates._id; // Prevent ID change
-        const result = await client.db("Norse_Interview").collection("courses").updateOne(
+        const result = await db.collection("courses").updateOne(
             { _id: id },
             { $set: updates }
         );
@@ -177,11 +179,11 @@ app.delete('/api/courses/:id', async (req, res) => {
     try {
         const id = new ObjectId(req.params.id);
         // Delete course
-        const courseResult = await client.db("Norse_Interview").collection("courses").deleteOne({ _id: id });
+        const courseResult = await db.collection("courses").deleteOne({ _id: id });
         if (courseResult.deletedCount === 0) return res.status(404).send("Course not found");
         
         // Remove from user enrollments
-        await client.db("Norse_Interview").collection("users").updateMany(
+        await db.collection("users").updateMany(
             { "enrolledCourses.courseId": id },
             { $pull: { enrolledCourses: { courseId: id } } }
         );
@@ -189,6 +191,32 @@ app.delete('/api/courses/:id', async (req, res) => {
         res.json({ message: "Course deleted successfully" });
     } catch (error) {
         res.status(500).send("Error deleting course");
+    }
+});
+
+app.post('/api/enroll', async (req, res) => {
+    const { email, courseId } = req.body;
+
+    try {
+        const user = await db.collection('users').findOne({ email });
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        const isEnrolled = user.enrolledCourses.some(course => course.courseId === courseId);
+        if (isEnrolled) {
+            return res.status(400).json({ message: 'User already enrolled in this course' });
+        }
+
+        await db.collection('users').updateOne(
+            { email },
+            { $push: { enrolledCourses: { courseId, completion: 0 } } }
+        );
+
+        res.status(200).json({ message: 'Enrolled successfully' });
+    } catch (error) {
+        console.error('Error enrolling user:', error);
+        res.status(500).json({ message: 'Internal server error' });
     }
 });
 
