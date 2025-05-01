@@ -18,4 +18,6 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.username').forEach(each => {
         each.textContent = username;
     });
+
+    document.getElementById('logoutButton')?.addEventListener('click', () => localStorage.removeItem('token'));
 });

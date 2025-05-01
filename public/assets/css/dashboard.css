@@ -322,7 +322,7 @@ body {
 
 .navbar-toggler i {
     font-size: 1.5rem;
-    color: var(--nku-yellow);
+    color: var(--nku-white);
 }
 
 @media (max-width: 991.98px) {

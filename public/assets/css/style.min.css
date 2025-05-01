@@ -1442,7 +1442,7 @@ textarea.form-control {
 	.navbar-custom .navbar-nav li a {
 		transition: all .4s;
 		margin: 6px;
-		color: #000 !important;
+		color: rgba(255, 255, 255, .6) !important;
 		padding: 6px 0
 	}
 
@@ -1459,7 +1459,7 @@ textarea.form-control {
 	}
 
 	.navbar-custom .navbar-nav li.active a, .navbar-custom .navbar-nav li a:hover, .navbar-custom .navbar-nav li a:active {
-		color: #FFC72C !important
+		color: var(--nku-white) !important;
 	}
 
 	.navbar-toggler {

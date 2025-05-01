@@ -102,7 +102,13 @@ app.post('/api/login', async (req, res) => {
         // Find user in the database
         const user = await db.collection("users").findOne({ email });
 
-        if (!user || user.password !== password) {
+        if (!user) {
+            return res.status(401).send("Invalid email or password");
+        }
+
+        const isPasswordValid = await bcrypt.compare(password, user.hashedPassword);
+
+        if (!isPasswordValid) {
             return res.status(401).send("Invalid email or password");
         }
 
@@ -111,6 +117,7 @@ app.post('/api/login', async (req, res) => {
 
         res.json({ token });
     } catch (error) {
+        console.error('Error logging in:', error);
         res.status(500).send("Error logging in");
     }
 });

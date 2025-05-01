@@ -19,7 +19,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const fetchData = async (data) => {
         try {
-            const response = await fetch(`${SERVER_URL}/${data}`); 
+            const response = await fetch(`${SERVER_URL}/${data}`, {
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${TOKEN}`,
+                    'Content-Type': 'application/json'
+                }
+            }); 
             return await response.json();
         } catch (error) {
             console.error('Fetch error:', error);
@@ -104,7 +110,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     
             await fetch(`${SERVER_URL}/courses`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    Authorization: `Bearer ${TOKEN}`,
+                    'Content-Type': 'application/json'
+                },
                 body: JSON.stringify(newCourse)
             });
             
@@ -151,7 +160,10 @@ document.addEventListener("DOMContentLoaded", async () => {
                 enrolledCourses.push({ courseId, completion: 0 });
                 await fetch(`${SERVER_URL}/enroll`, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: {
+                        Authorization: `Bearer ${TOKEN}`,
+                        'Content-Type': 'application/json'
+                    },
                     body: JSON.stringify({ email: CURRENT_USER, courseId })
                 });
     
@@ -202,7 +214,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         try {
             await fetch(`${SERVER_URL}/courses/${courseId}`, {
                 method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    Authorization: `Bearer ${TOKEN}`,
+                    'Content-Type': 'application/json'
+                },
                 body: JSON.stringify(updates)
             });
             
