@@ -15,9 +15,9 @@ For our final project in ASE 230 (Full Stack Application Development), we were t
 We decided to create a platform that assists college students in preparing for job interviews. This project aims to provide resources, practice questions, and tips to help students succeed in their job search.
 
 ### Key Features:
-- **AI-Powered Mock Interviews**: A feature that allows students to practice interviews with feedback from AI.
-- **Interview Questions**: A comprehensive list of common interview questions categorized by industry and job role.
-- **Resume Builder**: Tools and templates to help students create professional resumes.
+- **AI-Powered Mock Interviews** *coming soon!*: A feature that allows students to practice interviews with feedback from AI.
+- **Interview Questions** *coming soon!*: A comprehensive list of common interview questions categorized by industry and job role.
+- **Resume Builder** *coming soon!*: Tools and templates to help students create professional resumes.
 - **Resource Library**: Courses, videos, and other resources to help students prepare for interviews and job applications.
 
 ### Instructions:
