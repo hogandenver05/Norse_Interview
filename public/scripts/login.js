@@ -36,7 +36,7 @@ document.getElementById('loginForm').addEventListener('submit', async function (
             // TODO: Handle login failure with the form (make it fancy)
             const errorText = await response.text();
             console.error('Login failed:', errorText);
-            // alert('Login failed: ' + errorText);
+            alert('Login failed: ' + errorText);
         }
     } catch (error) {
         console.error('Error:', error);

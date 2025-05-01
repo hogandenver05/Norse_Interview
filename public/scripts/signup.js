@@ -5,6 +5,11 @@ document.getElementById('signupForm').addEventListener('submit', async function 
     const email = document.getElementById('inputEmail').value;
     const password = document.getElementById('inputPassword').value;
 
+    if (!email.endsWith('@nku.edu')) {
+        alert('Please use an NKU email');
+        return;
+    }
+
     try {
         // Send a POST request to the server
         const response = await fetch('http://localhost:3000/api/signup', {

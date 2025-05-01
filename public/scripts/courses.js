@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", async () => {
     const SERVER_URL = "http://localhost:3000/api";
+    let courseToDelete;
     
     
     const decodeToken = (token) => {
@@ -226,7 +227,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     try {
         await fetch(`${SERVER_URL}/courses/${courseToDelete}`, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+                Authorization: `Bearer ${TOKEN}`
+            }
         });
         
         await renderCourses();
@@ -314,6 +318,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         document.getElementById('confirmDelete')?.addEventListener('click', handleCourseDeletion);
         document.getElementById('editCourseForm')?.addEventListener('submit', handleCourseEdit);
         document.getElementById('backToCoursesBtn')?.addEventListener('click', resetForm);
+        document.getElementById('logoutButton')?.addEventListener('click', () => localStorage.removeItem('token'));
         document.addEventListener('click', handleDynamicElements);
         setupImageUpload();
     };

@@ -1,14 +1,16 @@
 const fs = require("fs");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 const express = require("express");
-const cors = require('cors');
-const jwt = require('jsonwebtoken');
-require('dotenv').config();
-const { MongoClient, ObjectId, ServerApiVersion } = require('mongodb');
-const MONGO_URI = process.env.MONGODB_URI;
-const JWT_SECRET = process.env.JWT_SECRET || "your_jwt_secret_key";
+const cors = require("cors");
 
 const app = express();
 const port = 3000;
+
+require('dotenv').config();
+const MONGO_URI = process.env.MONGODB_URI;
+const JWT_SECRET = process.env.JWT_SECRET;
+const { MongoClient, ObjectId, ServerApiVersion } = require('mongodb');
 
 app.use(express.json());
 app.use(express.static('public')); 
@@ -35,6 +37,7 @@ function authenticateToken(req, res, next) {
         req.user = user; // Attach user info to request
         next();
     });
+    // req.userEmail = jwt.decode(token);
 }
 
 /* HTML ENDPOINTS */
@@ -64,6 +67,7 @@ app.post('/api/validate-token', authenticateToken, (req, res) => {
 // Signup endpoint
 app.post('/api/signup', async (req, res) => {
     const { email, password } = req.body;
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     try {
         // Check if the user already exists
@@ -75,12 +79,11 @@ app.post('/api/signup', async (req, res) => {
         // Insert the new user into the database
         const newUser = { 
             email,
-            password, // TODO: Hash the password in production
+            hashedPassword,
             username: email.split('@')[0], // Extract username from email
             enrolledCourses: [],
             interviews: [],
             isAdmin: false,
-            isLoggedIn: false
         };
         await db.collection("users").insertOne(newUser);
 
@@ -130,13 +133,13 @@ app.get('/api/users/:email', async (req, res) => {
 });
 
 // Get all courses
-app.get('/api/courses', async (req, res) => {
+app.get('/api/courses', authenticateToken, async (req, res) => {
     let courses = await db.collection("courses").find({}).toArray();
     res.json(courses);
 });
 
 // Get course by ID
-app.get('/api/courses/:id', async (req, res) => {
+app.get('/api/courses/:id', authenticateToken, async (req, res) => {
     let id = new ObjectId(req.params.id);
     let course = await db.collection("courses").findOne({ _id: id });
     if (course) {
@@ -147,54 +150,64 @@ app.get('/api/courses/:id', async (req, res) => {
 });
 
 // Create new course
-app.post('/api/courses', async (req, res) => {
-    try {
-        const newCourse = req.body;
-        const result = await db.collection("courses").insertOne(newCourse);
-        res.status(201).json({ ...newCourse, _id: result.insertedId });
-    } catch (error) {
-        res.status(500).send("Error creating course");
+app.post('/api/courses', authenticateToken, async (req, res) => {
+    let user = await db.collection("users").findOne({email: req.user.email});
+    if (user.isAdmin) {
+        try {
+            const newCourse = req.body;
+            const result = await db.collection("courses").insertOne(newCourse);
+            res.status(201).json({ ...newCourse, _id: result.insertedId });
+        } catch (error) {
+            res.status(500).send("Error creating course");
+        }
     }
 });
 
 // Update course by ID
-app.put('/api/courses/:id', async (req, res) => {
-    try {
-        const id = new ObjectId(req.params.id);
-        const updates = req.body;
-        delete updates._id; // Prevent ID change
-        const result = await db.collection("courses").updateOne(
-            { _id: id },
-            { $set: updates }
-        );
-        if (result.matchedCount === 0) return res.status(404).send("Course not found");
-        res.json({ message: "Course updated successfully" });
-    } catch (error) {
-        res.status(500).send("Error updating course");
+app.put('/api/courses/:id', authenticateToken, async (req, res) => {
+    let user = await db.collection("users").findOne({email: req.user.email});
+    if (user.isAdmin) {
+        try {
+            const id = new ObjectId(req.params.id);
+            const updates = req.body;
+            delete updates._id; // Prevent ID change
+            const result = await db.collection("courses").updateOne(
+                { _id: id },
+                { $set: updates }
+            );
+            if (result.matchedCount === 0) return res.status(404).send("Course not found");
+            res.json({ message: "Course updated successfully" });
+        } catch (error) {
+            res.status(500).send("Error updating course");
+        }
     }
 });
 
 // Delete course by ID
-app.delete('/api/courses/:id', async (req, res) => {
-    try {
-        const id = new ObjectId(req.params.id);
-        // Delete course
-        const courseResult = await db.collection("courses").deleteOne({ _id: id });
-        if (courseResult.deletedCount === 0) return res.status(404).send("Course not found");
-        
-        // Remove from user enrollments
-        await db.collection("users").updateMany(
-            { "enrolledCourses.courseId": id },
-            { $pull: { enrolledCourses: { courseId: id } } }
-        );
-        
-        res.json({ message: "Course deleted successfully" });
-    } catch (error) {
-        res.status(500).send("Error deleting course");
+app.delete('/api/courses/:id', authenticateToken, async (req, res) => {
+    let user = await db.collection("users").findOne({email: req.user.email});
+    if (user.isAdmin) {
+        try {
+            const id = new ObjectId(req.params.id);
+            
+            // Delete course
+            const courseResult = await db.collection("courses").deleteOne({ _id: id });
+            if (courseResult.deletedCount === 0) return res.status(404).send("Course not found");
+
+            // Remove from user enrollments
+            await db.collection("users").updateMany(
+                { "enrolledCourses.courseId": id },
+                { $pull: { enrolledCourses: { courseId: id } } }
+            );
+
+            res.json({ message: "Course deleted successfully" });
+        } catch (error) {
+            res.status(500).send("Error deleting course");
+        }
     }
 });
 
-app.post('/api/enroll', async (req, res) => {
+app.post('/api/enroll', authenticateToken, async (req, res) => {
     const { email, courseId } = req.body;
 
     try {
