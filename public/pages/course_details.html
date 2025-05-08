@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Course Detail</title>
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/style.min.css">
+    <link rel="stylesheet" href="/assets/css/course_detail.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <button class="back-button" onclick="window.location.href='courses.html'">
+        <i class="fas fa-arrow-left me-2"></i>Back to Courses
+    </button>
+
+    <div class="container">
+        <div id="course-detail" class="course-header"></div>
+        <div id="topic-content" class="topic-section"></div>
+        <div id="navigation" class="navigation-buttons">
+            <button id="prevBtn" class="nav-btn" style="display: none;">Previous</button>
+            <button id="nextBtn" class="nav-btn">Next</button>
+            <button id="goToQuizBtn" class="nav-btn" style="display: none;">Go to Quiz</button>
+        </div>
+        <div id="quiz-section" class="quiz-section" style="display: none;"></div>
+    </div>
+
+    <script src="/scripts/course_detail.js"></script>
+</body>
+</html>

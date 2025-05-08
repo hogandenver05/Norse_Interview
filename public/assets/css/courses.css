@@ -229,13 +229,14 @@
 
 /* Course Cards */
 .card {
-    background: var(--nku-white);
-    border: none;
-    border-radius: 20px;
-    overflow: hidden;
-    transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
-    height: 100%;
     position: relative;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+    background: #181818;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: none;
+    min-height: 320px;
 }
 
 .card:hover {
@@ -277,53 +278,63 @@
 }
 
 /* Card Actions */
-.edit-btn,
-.delete-btn {
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+.card-actions {
+    padding: 1rem;
+    background: rgba(24, 24, 24, 0.95);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-view-course {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 12px;
+    font-weight: 500;
+    background: var(--nku-yellow);
+    color: var(--nku-black);
     border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--nku-white);
-    backdrop-filter: blur(4px);
     transition: all 0.3s ease;
-    cursor: pointer;
-    z-index: 10;
 }
 
-.edit-btn {
-    top: 1rem;
-    left: 1rem;
+.btn-view-course:hover {
+    background: #ffd700;
+    transform: translateY(-2px);
 }
 
-.delete-btn {
+/* Enrollment Status */
+.enrollment-status {
+    position: absolute;
     top: 1rem;
     right: 1rem;
-}
-
-.edit-btn i {
-    color: var(--nku-black);
-}
-
-.delete-btn i {
-    color: #dc3545;
-}
-
-.edit-btn:hover,
-.delete-btn:hover {
-    transform: scale(1.1);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
     background: var(--nku-yellow);
+    color: var(--nku-black);
+    z-index: 1;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-.edit-btn:hover i {
+.btn-enroll {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    background: var(--nku-yellow);
     color: var(--nku-black);
+    z-index: 1;
+    border: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
 }
 
-.delete-btn:hover i {
-    color: var(--nku-black);
+.btn-enroll:hover {
+    background: #ffd700;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 /* Card Content */
@@ -333,7 +344,7 @@
     left: 0;
     right: 0;
     padding: 2rem 1.5rem 1.5rem;
-    background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.2), transparent);
+    background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.4), transparent);
     transition: all 0.3s ease;
 }
 
@@ -350,33 +361,11 @@
     margin-top: 0.5rem;
     font-size: 0.9rem;
     opacity: 0.9;
-}
-
-/* Enrollment Status */
-.enrollment-status{
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-size: 0.875rem;
-    font-weight: 500;
-    background: var(--nku-yellow);
-    color: var(--nku-black);
-    z-index: 1;
-}
-
-.btn-enroll {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-size: 0.875rem;
-    font-weight: 500;
-    background: var(--nku-yellow);
-    color: var(--nku-black);
-    z-index: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* Floating Add Button */
