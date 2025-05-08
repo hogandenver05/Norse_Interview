@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Course Detail - Norse Interview</title>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/assets/css/style.min.css" />
+  <link rel="stylesheet" href="/assets/css/index.css" />
+  <link rel="stylesheet" href="/assets/css/dashboard.css" />
+  <script defer src="/scripts/course_detail.js"></script>
+</head>
+<body>
+  <!-- START NAVBAR -->
+  <nav class="navbar navbar-expand-lg fixed-top navbar-custom sticky sticky-light px-5" id="navbar">
+    <div class="container-fluid">
+      <a class="navbar-brand logo text-uppercase" href="/">
+        <img src="/assets/images/full-logo-white.png" alt="NKU Logo" height="50">
+        <img src="/assets/images/norse-white.png" alt="Norse Logo" height="35">
+      </a>
+    </div>
+  </nav>
+  <!-- END NAVBAR -->
+
+  <main class="dashboard-container py-5">
+    <div class="container mt-5">
+      <h1 id="course-title" class="mb-3"></h1>
+      <p id="chapter-title" class="mb-3"></p>
+      <div class="progress mb-4">
+        <div id="progress-fill" class="progress-bar" role="progressbar" style="width: 0%">0% Complete</div>
+      </div>
+
+      <div id="chapter-container">
+        <h3 id="chapter-title"></h3>
+        <p id="chapter-goals" class="text-muted"></p>
+        <pre id="chapter-content" class="bg-light p-3 rounded"></pre>
+      </div>
+
+      <div class="mt-4 d-flex justify-content-between">
+        <button id="prev-btn" class="btn btn-outline-secondary">Previous</button>
+        <button id="next-btn" class="btn btn-primary">Next</button>
+      </div>
+    </div>
+  </main>
+
+  <script src="/scripts/bootstrap.bundle.min.js"></script>
+</body>
+</html>
