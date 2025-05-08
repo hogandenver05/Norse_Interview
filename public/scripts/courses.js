@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const enrollmentStatus = (isEnrolled, completion, courseId) => isEnrolled ? `
         <div class="enrollment-status enrolled">
-            <i class="fas fa-check-circle me-1"></i>Enrolled
+            <i class="fas fa-check-circle me-1"></i>${completion}% Complete
         </div>` : `
         <button class="btn btn-primary btn-enroll" data-course-id="${courseId}">
             <i class="fas fa-plus-circle me-1"></i>Enroll Now

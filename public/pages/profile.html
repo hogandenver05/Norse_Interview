@@ -1,45 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Account - Norse Interview</title>
-    <link rel="shortcut icon" href="/assets/icons/favicon/favicon-96x96.png" />
-    <link rel="icon" type="image/png" href="/assets/icons/favicon/favicon-96x96.png" sizes="96x96" />
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" type="text/css" href="/assets/css/style.min.css" />
-    <link rel="stylesheet" type="text/css" href="/assets/css/dashboard.css">
-    <link rel="stylesheet" href="/assets/css/index.css">
-    <link rel="stylesheet" href="/assets/css/profile.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile - Norse Interview</title>
+  <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/assets/css/profile.css">
 </head>
-<body>
-    <div class="profile-wrapper">
-        <div class="profile-content" style="max-width:400px;margin:60px auto;padding:32px 32px 24px 32px;background:#181818;border-radius:18px;box-shadow:0 4px 24px rgba(0,0,0,0.12);position:relative;">
-            <button id="closeProfileBtn" style="position:absolute;top:18px;right:18px;background:none;border:none;font-size:1.5rem;color:#fff;cursor:pointer;" title="Close">&times;</button>
-            <h2 style="font-weight:700;margin-bottom:24px;text-align:center;">Profile</h2>
-            <form class="profile-form" id="profileForm">
-                <div class="form-row" style="margin-bottom:18px;">
-                    <label for="username">Username*</label>
-                    <input type="text" id="username" required style="width:100%;">
-                </div>
-                <div class="form-row" style="margin-bottom:18px;">
-                    <label for="email">Email*</label>
-                    <input type="email" id="email" readonly style="width:100%;">
-                </div>
-                <div class="form-row" style="margin-bottom:18px;">
-                    <div id="coursesCount" style="color:#fff;font-size:1.1rem;"></div>
-                </div>
-                <div class="form-row" style="margin-bottom:24px;">
-                    <div id="interviewsCount" style="color:#fff;font-size:1.1rem;"></div>
-                </div>
-                <button type="submit" class="update-btn" id="updateProfileBtn" style="width:100%;">Update Profile</button>
-            </form>
+<body class="profile-dark-bg">
+  <a href="/pages/dashboard.html" class="back-button">
+    <i class="fas fa-arrow-left me-2"></i>Back to Dashboard
+  </a>
+
+  <div class="profile-container">
+    <div class="profile-box">
+      <h2>Profile</h2>
+      <div class="info-row">
+        <span class="info-label">Username:</span>
+        <span id="usernameDisplay" class="info-value">Loading...</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Email:</span>
+        <span id="emailDisplay" class="info-value">Loading...</span>
+      </div>
+
+      <div class="courses-section">
+        <h3>My Courses</h3>
+        <div id="coursesList" class="courses-list">
+          <!-- Dynamically populated -->
         </div>
+      </div>
     </div>
-    <script src="/scripts/profile.js"></script>
+  </div>
+
+  <script src="/scripts/profile.js"></script>
 </body>
-</html> 
+</html>

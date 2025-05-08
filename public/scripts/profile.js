@@ -1,79 +1,68 @@
-// profile.js
+document.addEventListener('DOMContentLoaded', function() {
+    const usernameDisplay = document.getElementById('usernameDisplay');
+    const emailDisplay = document.getElementById('emailDisplay');
+    const coursesList = document.getElementById('coursesList');
 
-document.addEventListener('DOMContentLoaded', async function() {
-    const decodeToken = (token) => {
+    // Load user profile data
+    async function loadProfileData() {
         try {
-            const payload = JSON.parse(atob(token.split('.')[1]));
-            return payload;
-        } catch (error) {
-            console.error('Error decoding token:', error);
-            return null;
-        }
-    };
-
-    const TOKEN = localStorage.getItem('token');
-    if (!TOKEN) return;
-    const CURRENT_USER = decodeToken(TOKEN)?.email;
-    if (!CURRENT_USER) return;
-
-    try {
-        const response = await fetch(`http://localhost:3000/api/users/${CURRENT_USER}`, {
-            method: 'GET',
-            headers: {
-                Authorization: `Bearer ${TOKEN}`,
-                'Content-Type': 'application/json'
+            const token = localStorage.getItem('token');
+            const response = await fetch('/api/user/profile', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            const data = await response.json();
+            
+            if (data.success) {
+                usernameDisplay.textContent = data.user.username;
+                emailDisplay.textContent = data.user.email;
+                displayCourses(data.user.courses);
             }
-        });
-        if (!response.ok) throw new Error('Failed to fetch user info');
-        const user = await response.json();
-
-        document.getElementById('username').value = user.username || '';
-        document.getElementById('email').value = user.email || '';
-
-        // Show number of courses
-        const coursesCount = document.getElementById('coursesCount');
-        if (user.enrolledCourses && user.enrolledCourses.length > 0) {
-            coursesCount.innerHTML = `Registered Courses: <b>${user.enrolledCourses.length}</b>`;
-        } else {
-            coursesCount.innerHTML = 'No courses registered.';
+        } catch (error) {
+            console.error('Error loading profile:', error);
         }
-
-        // Show number of interviews
-        const interviewsCount = document.getElementById('interviewsCount');
-        if (user.interviews && user.interviews.length > 0) {
-            interviewsCount.innerHTML = `Registered Interviews: <b>${user.interviews.length}</b>`;
-        } else {
-            interviewsCount.innerHTML = 'No interviews registered.';
-        }
-    } catch (error) {
-        console.error('Error loading user profile:', error);
     }
 
-    // Handle profile update
-    document.getElementById('profileForm').addEventListener('submit', async function(e) {
-        e.preventDefault();
-        const updatedUser = {
-            username: document.getElementById('username').value.trim()
-        };
-        try {
-            const res = await fetch(`http://localhost:3000/api/users/${CURRENT_USER}`, {
-                method: 'PUT',
-                headers: {
-                    Authorization: `Bearer ${TOKEN}`,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(updatedUser)
-            });
-            if (!res.ok) throw new Error('Failed to update profile');
-            alert('Profile updated successfully!');
-        } catch (err) {
-            alert('Error updating profile.');
-            console.error(err);
+    function displayCourses(courses) {
+        coursesList.innerHTML = '';
+    
+        if (!courses || courses.length === 0) {
+            coursesList.innerHTML = '<p style="color: #888;">No courses enrolled yet.</p>';
+            return;
         }
-    });
+    
+        courses.forEach(course => {
+            const progress = course.completion;
+            let statusLabel;
+    
+            if (progress === 0) {
+                statusLabel = '<span class="course-status-label yet">Yet to start</span>';
+            } else if (progress === 100) {
+                statusLabel = '<span class="course-status-label completed">Completed</span>';
+            } else {
+                statusLabel = '<span class="course-status-label in-progress">In progress</span>';
+            }
+    
+            const courseElement = document.createElement('div');
+            courseElement.className = 'course-item';
+            courseElement.innerHTML = `
+                <h4>${course.title}</h4>
+                <div class="course-progress">
+                    <div class="progress">
+                        <div class="progress-bar" style="width: ${progress}%"></div>
+                    </div>
+                </div>
+                <div class="course-status-row">
+                    ${statusLabel}
+                    <span class="completed">${Math.round(progress)}%</span>
+                </div>
+            `;
+            coursesList.appendChild(courseElement);
+        });
+    }
+    
 
-    // Handle close (X) button
-    document.getElementById('closeProfileBtn').addEventListener('click', function() {
-        window.history.back();
-    });
+    // Load initial data
+    loadProfileData();
 }); 

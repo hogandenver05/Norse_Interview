@@ -223,6 +223,43 @@ app.put('/api/progress', authenticateToken, async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 });
+//profile
+app.get('/api/user/profile', authenticateToken, async (req, res) => {
+    try {
+        const user = await db.collection("users").findOne(
+            { email: req.user.email },
+            { projection: { hashedPassword: 0 } }
+        );
+
+        if (!user) return res.status(404).json({ success: false, message: 'User not found' });
+
+        const courseIds = user.enrolledCourses?.map(c => new ObjectId(c.courseId)) || [];
+
+        const courseDocs = await db.collection("courses")
+            .find({ _id: { $in: courseIds } })
+            .toArray();
+
+        const courses = user.enrolledCourses.map(enrolled => {
+            const courseData = courseDocs.find(c => c._id.toString() === enrolled.courseId);
+            return {
+                title: courseData?.title || "Untitled Course",
+                completion: enrolled.completion || 0
+            };
+        });
+
+        res.json({
+            success: true,
+            user: {
+                username: user.username,
+                email: user.email,
+                courses
+            }
+        });
+    } catch (err) {
+        console.error('Error loading profile:', err);
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
+});
 
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);

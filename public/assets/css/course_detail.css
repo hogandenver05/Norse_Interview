@@ -156,12 +156,29 @@ body {
     background: rgba(255, 210, 4, 0.2);
 }
 
-/* Remove progress bar styles */
-.progress-container,
-.progress-bar,
-.progress-fill,
+/* Progress Bar Styles */
+.progress-container {
+    margin: 2rem 0;
+    padding: 0 1rem;
+}
+
+.progress {
+    height: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    background: #ffd204;
+    transition: width 0.3s ease;
+}
+
 .progress-text {
-    display: none;
+    margin-top: 0.5rem;
+    text-align: right;
+    color: #e0e0e0;
+    font-size: 0.9rem;
 }
 
 @media (max-width: 600px) {

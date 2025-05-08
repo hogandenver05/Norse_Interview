@@ -43,9 +43,15 @@ const renderCourseDetail = async () => {
     });
     const user = await userRes.json();
 
-    // Find enrolled course
+    // Find enrolled course and set initial progress
     const enrolled = user.enrolledCourses.find(c => c.courseId === courseId);
-    if (!enrolled) {
+    if (enrolled) {
+        const progressBar = document.querySelector('.progress-bar');
+        const progressText = document.getElementById('progress-percentage');
+        progressBar.style.width = `${enrolled.completion}%`;
+        progressText.textContent = enrolled.completion;
+        currentTopic = Math.ceil(enrolled.completion / 15);
+    } else {
         currentTopic = 1;
     }
 
@@ -55,6 +61,31 @@ const renderCourseDetail = async () => {
     `;
 
     renderCurrentTopic();
+};
+
+const updateProgress = async (completion) => {
+    const token = localStorage.getItem("token");
+    const courseId = getCourseIdFromURL();
+    const email = getCurrentUser();
+
+    try {
+        await fetch(`${SERVER_URL}/progress`, {
+            method: 'PUT',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email, courseId, completion })
+        });
+
+        // Update progress bar UI
+        const progressBar = document.querySelector('.progress-bar');
+        const progressText = document.getElementById('progress-percentage');
+        progressBar.style.width = `${completion}%`;
+        progressText.textContent = completion;
+    } catch (error) {
+        console.error('Error updating progress:', error);
+    }
 };
 
 const renderCurrentTopic = () => {
@@ -81,6 +112,10 @@ const renderCurrentTopic = () => {
     const topic = course[`topic${currentTopic}`];
     const goal = course[`goal${currentTopic}`];
     const content = course[`content${currentTopic}`];
+
+    // Update progress based on current topic (15% per topic)
+    const progress = Math.min(currentTopic * 15, 75);
+    updateProgress(progress);
 
     topicContent.innerHTML = `
         <h2>${topic}</h2>
@@ -156,6 +191,8 @@ const checkAnswers = async () => {
     btn.id = 'nextStepBtn';
     btn.className = 'nav-btn';
     if (allCorrect) {
+        // Update progress to 100% when quiz is completed successfully
+        await updateProgress(100);
         btn.textContent = 'Next Course';
         btn.onclick = () => window.location.href = 'courses.html';
     } else {
