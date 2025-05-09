@@ -1,94 +1,106 @@
-# Norse Interview
-A career help hub for college students looking to secure their next job. 
+# Norse Interview  
+A career help hub for college students looking to secure their next job.
 
-### Contributors:
-- **Denver Hogan**
-- **Oshan Maharjan**
+![Norse Interview Demo]
+▶️ [YouTube Demo Video](https://www.youtube.com/watch?v=6CmSgrlMoe4)
 
-### The Why: 
-For our final project in ASE 230 (Full Stack Application Development), we were tasked to team up with our peers and...
-- Design and implement a RESTful API with Node.js + Express.
-- Persist and query data with MongoDB.
-- Protect routes with JSON Web Tokens (JWT) and session management.
-- Combine the server-side component with the existing front end to provide a cohesive user experience.
+## 👥 Contributors
+- [Denver Hogan](https://github.com/hogandenver05)
+- [Oshan Maharjan](https://github.com/oshanma)
 
-We decided to create a platform that assists college students in preparing for job interviews. This project aims to provide resources, practice questions, and tips to help students succeed in their job search.
+---
 
-### Technical Implementation:
-- **Backend**: Node.js + Express.js
-- **Database**: MongoDB with proper data modeling
-- **Authentication**: JWT (JSON Web Tokens) with bcrypt password hashing
-- **Frontend**: HTML, CSS, JavaScript with modern UI/UX practices
-- **Security**: Protected routes, secure session management, and data encryption
+## 🎯 Project Overview
 
-### Key Features:
-1. **AI-Powered Mock Interviews**
-   - Personalized interview questions based on resume and job description
-   - Real-time emotional tracking during interviews
-   - LLM-powered feedback and recommendations
-   - Experience pitching suggestions
-   - Answer recommendations based on user's background
+**Norse Interview** is a full-stack career development platform built to help college students prepare for job interviews through AI-powered mock interviews, resume building, and skill development resources.
 
-2. **Interview Questions**
-   - Industry-specific question banks
-   - Role-based question categories
-   - Difficulty levels
-   - Sample answers and best practices
+We were inspired by [BigInterview.com](https://www.biginterview.com/)—a paid platform provided to NKU students through Career Services. Our goal was to create a **free and open-source** alternative that provides similar (or even better) features for all students.
 
-3. **Resume Builder**
-   - Professional templates
-   - AI-powered content suggestions
-   - Industry-specific formatting
-   - ATS-friendly optimization
+---
 
-4. **Resource Library**
-   - AI-generated course content
-   - Video tutorials
-   - Interactive learning modules
-   - Progress tracking
-   - Course enrollment system
+## 🧪 Built For  
+Final project submission for **ASE 230 – Full Stack Application Development** at Northern Kentucky University.
 
-### Database Structure:
-- **Users Collection**
-  - User profiles
-  - Authentication data
-  - Enrolled courses
-  - Interview history
-  - Progress tracking
+---
 
-- **Courses Collection**
-  - Course content
-  - Learning materials
-  - Progress tracking
-  - Enrollment data
+## 🧱 Tech Stack
 
-### Security Features:
+| Layer       | Tech Details                            |
+|-------------|------------------------------------------|
+| Backend     | Node.js, Express.js                      |
+| Frontend    | HTML, CSS, JavaScript                    |
+| Database    | MongoDB with Mongoose ORM                |
+| Auth/Security | JWT + bcrypt, protected API routes     |
+
+---
+
+## 🔐 Security Features
 - JWT-based authentication
-- Password hashing with bcrypt
-- Protected API routes
+- Bcrypt password hashing
 - Secure session management
-- Data encryption
+- Encrypted data
+- Role-based route protection
 
-### Instructions:
-1. **Clone the Repository**: `git clone https://github.com/yourusername/Norse_Interview.git`
-2. **Navigate to the Project Directory**: `cd Norse_Interview`
-3. **Install Dependencies**: `npm install`
-4. **Add '.env' File**: *(provided in submission)*
-   - MONGODB_URI: Your MongoDB connection string
-   - JWT_SECRET: Your JWT secret key
-5. **Run the Application**: `node server.js`
-6. **Access the Application**: Open your browser and go to `http://localhost:3000`
+---
 
-### API Endpoints:
-- `/api/signup`: User registration
-- `/api/login`: User authentication
-- `/api/courses`: Course management
-- `/api/interviews`: Interview session management
-- `/api/users`: User profile management
+## 🚀 Key Features
 
-### Future Enhancements:
-- Real-time interview feedback
-- Advanced emotional analysis
-- Integration with job boards
-- Mobile application
-- Community features for peer learning
+### 1. AI-Powered Mock Interviews
+- Personalized questions based on resume and job description
+- Real-time emotional tracking (prototype stage)
+- LLM-powered answer feedback
+- Pitch enhancement suggestions
+
+### 2. Interview Questions
+- Role-based and industry-specific question banks
+- Difficulty levels with sample answers
+
+### 3. Resume Builder
+- ATS-optimized professional templates
+- AI-generated content suggestions
+- Industry-specific formats
+
+### 4. Resource Library
+- AI-generated course content
+- Video tutorials and interactive modules
+- Progress tracking and enrollment system
+
+---
+
+## 🗃️ Database Collections
+
+### Users Collection
+- User profile and login info
+- Enrolled courses
+- Interview attempt history
+- Progress tracking
+
+### Courses Collection
+- Course modules and goals
+- Learning materials
+- Enrollment and progress tracking
+
+---
+
+## ⚙️ Setup Instructions
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/hogandenver05/Norse_Interview.git
+
+# 2. Navigate into the project folder
+cd Norse_Interview
+
+# 3. Install dependencies
+npm install
+
+# 4. Add your .env file
+# .env should contain the following:
+# MONGODB_URI=your_mongodb_connection_string
+# JWT_SECRET=your_jwt_secret_key
+
+# 5. Start the server
+node server.js
+
+# 6. Visit the app in your browser
+http://localhost:3000
