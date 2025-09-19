@@ -1,8 +1,7 @@
 # Norse Interview  
 A career help hub for college students looking to secure their next job.
 
-![Norse Interview Demo]
-▶️ [YouTube Demo Video](https://www.youtube.com/watch?v=6CmSgrlMoe4)
+[▶️ Norse Interview Demo](https://www.youtube.com/watch?v=6CmSgrlMoe4)
 
 ## 👥 Contributors
 - [Denver Hogan](https://github.com/hogandenver05)
